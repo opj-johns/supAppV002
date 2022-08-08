@@ -1,0 +1,58 @@
+<div class="container">
+  <h2>Fill the datails below to retreive an attendance sheet</h2>
+  <form #takeAttendanceForm="ngForm">
+    <div class="row mb-3">
+      <label for="professor" class="col-sm-2 col-form-label">Professor</label>
+      <div class="col-sm-10">
+        <select
+          class="form-select form-select-sm"
+          name="professor"
+          id="professor"
+          required
+          [(ngModel)]="selectedProfessorID"
+        >
+          <option [value]="professor.id" *ngFor="let professor of professors">
+            {{ professor.firstName }}&nbsp;&nbsp;{{ professor.lastName }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="course" class="col-sm-2 col-form-label">Course</label>
+      <div class="col-sm-10">
+        <select
+          name="course"
+          class="form-select form-select-sm"
+          id="course"
+          required
+          [(ngModel)]="selectedCourseID"
+        >
+          <option [value]="course.id" *ngFor="let course of courses">
+            {{ course.courseName }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="level" class="col-sm-2 col-form-label">Level</label>
+      <div class="col-sm-10">
+        <select
+          name="level"
+          id="level"
+          class="form-select form-select-sm"
+          required
+          [(ngModel)]="selectedLevelID"
+        >
+          <option [value]="level.id" *ngFor="let level of levels">
+            {{ level.levelName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <button mat-raised-button (click)="goToAttendanceSheet()">
+      Get attendance sheet
+    </button>
+  </form>
+</div>

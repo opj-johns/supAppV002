@@ -1,0 +1,24 @@
+<div class="container">
+  <h2>Fill the form to add a new subject</h2>
+  <form (ngSubmit)="onSubmit()" #subjectForm="ngForm">
+    <div class="form-group">
+      <label for="subjectName">Subject Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="subjectName"
+        required
+        [(ngModel)]="subject.subjectName"
+        name="name"
+      />
+    </div>
+    <button
+      mat-raised-button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="!subjectForm.form.valid"
+    >
+      Save
+    </button>
+  </form>
+</div>

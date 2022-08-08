@@ -1,0 +1,25 @@
+/* Structure */
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    table {
+            width: 70%;
+            align-self: center;
+            tr{
+                    cursor: pointer;
+
+            }
+        }
+       mat-form-field {
+            width: 70%;
+            font-size: 14px;
+            
+        }
+
+        .add-subject-btn{
+                margin-bottom: 5px;
+        }
+}

@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>{{ subject.subjectName | uppercase }}</h2>
+  <p>This subject is thought in 2 courses</p>
+  <p>Student pass rate of this course is 70%</p>
+
+  <div class="btns">
+    <button mat-raised-button (click)="goToEditPage()">Edit</button>
+    <button mat-raised-button (click)="deleteSubject()">Delete</button>
+
+    <button mat-button color="primary" (click)="showSubjects()">
+      Back To Subjects
+    </button>
+  </div>
+</div>

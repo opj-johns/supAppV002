@@ -1,0 +1,15 @@
+<div class="contain">
+  <h2>Educational Year in SupManagement</h2>
+
+  <mat-card class="card" *ngFor="let level of levels">
+    {{ level.levelName }}
+    <button
+      class="btn-edit"
+      mat-raised-button
+      color="primary"
+      (click)="openDialog(level)"
+    >
+      Edit
+    </button>
+  </mat-card>
+</div>

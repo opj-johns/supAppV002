@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Courses in SupManagement</h2>
+
+  <button class="btn-new" mat-raised-button routerLink="/course/new">
+    Add New Course
+  </button>
+
+  <mat-card class="card" *ngFor="let course of courses">
+    {{ course.courseName }}
+    <button
+      class="btn-edit"
+      mat-raised-button
+      (click)="editCoursePage(course.id)"
+      color="accent"
+    >
+      Edit
+    </button>
+  </mat-card>
+</div>

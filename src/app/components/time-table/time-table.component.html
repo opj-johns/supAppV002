@@ -1,0 +1,52 @@
+<div class="container">
+  <h2>Time Table Operations</h2>
+  <div class="operations">
+    <p><a routerLink="/timetable/create">Create Time Table</a></p>
+  </div>
+  <p class="title">List of vaible Timetables</p>
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item
+      *ngFor="let item of items; let index = index"
+      #accordionItem="cdkAccordionItem"
+      class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      [attr.id]="'accordion-header-' + index"
+      [attr.aria-expanded]="accordionItem.expanded"
+      [attr.aria-controls]="'accordion-body-' + index"
+    >
+      <div
+        class="example-accordion-item-header"
+        (click)="accordionItem.toggle()"
+      >
+        {{ item }}
+        <span class="example-accordion-item-description">
+          Click to {{ accordionItem.expanded ? "close" : "open" }}
+        </span>
+      </div>
+      <div
+        class="example-accordion-item-body"
+        role="region"
+        [style.display]="accordionItem.expanded ? '' : 'none'"
+        [attr.id]="'accordion-body-' + index"
+        [attr.aria-labelledby]="'accordion-header-' + index"
+      >
+        <p *ngFor="let course of createdTBCourses[index]">
+          <button style="border: none">
+            <a
+              class="course-links"
+              [routerLink]="
+                'view_edit_new/' + course.id + '/' + index + '/view'
+              "
+            >
+              {{ course.courseName }}
+            </a>
+          </button>
+        </p>
+        <p *ngIf="createdTBCourses[index].length < 1">
+          No time tables created yet
+        </p>
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+</div>

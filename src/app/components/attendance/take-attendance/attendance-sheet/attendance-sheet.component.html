@@ -1,0 +1,95 @@
+<div class="constainer">
+  <h2>Attendance Sheet</h2>
+  <section class="att-info">
+    <h3>Sheet Details</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td>Professor</td>
+          <td>{{ professor.firstName }}&nbsp;&nbsp;{{ professor.lastName }}</td>
+        </tr>
+        <tr>
+          <td>Course</td>
+          <td>{{ course.courseName }}</td>
+        </tr>
+        <tr>
+          <td>Level</td>
+          <td>{{ level.levelName }}</td>
+        </tr>
+        <tr>
+          <td>Subject</td>
+          <td>
+            <div
+              *ngIf="
+                noOfSubjectsTaught === 0;
+                then noSubject;
+                else subjectExist
+              "
+            ></div>
+
+            <ng-template #subjectExist>
+              <div
+                *ngIf="
+                  noOfSubjectsTaught === 1;
+                  then oneSubject;
+                  else moreSubjects
+                "
+              ></div>
+              <ng-template #oneSubject>
+                <p *ngFor="let subject of professor.subjectsTaught">
+                  {{ subject.subjectName }}
+                </p>
+              </ng-template>
+
+              <ng-template #moreSubjects>
+                <select
+                  class="form-select"
+                  [(ngModel)]="subjectId"
+                  aria-label="Default select example"
+                >
+                  <option
+                    [value]="subject.id"
+                    *ngFor="let subject of professor.subjectsTaught"
+                  >
+                    {{ subject.subjectName }}
+                  </option>
+                </select>
+              </ng-template>
+            </ng-template>
+            <ng-template #noSubject>
+              You have no subjects teaching
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <div class="att-state">
+    <div class="absent">
+      <h3>Absent students</h3>
+
+      <div class="list">
+        <mat-card
+          (click)="sendToPresentList(absentStudent)"
+          *ngFor="let absentStudent of absentStudents"
+          >{{ absentStudent.firstName }}&nbsp;&nbsp;{{
+            absentStudent.lastName
+          }}</mat-card
+        >
+      </div>
+    </div>
+    <div class="present">
+      <h3>Present students</h3>
+      <div class="list">
+        <mat-card
+          (click)="sendToAbsentList(presentStudent)"
+          *ngFor="let presentStudent of presentStudents"
+          >{{ presentStudent.firstName }}&nbsp;&nbsp;{{
+            presentStudent.lastName
+          }}</mat-card
+        >
+      </div>
+    </div>
+  </div>
+  <p><a (click)="recordAttendanceSheet()">Record Attendance</a></p>
+</div>

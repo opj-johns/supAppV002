@@ -1,0 +1,38 @@
+// .example-form {
+//     min-width: 150px;
+//     max-width: 500px;
+//     width: 100%;
+// }
+.contain{
+    margin:0;
+    padding: 0; 
+    color: black;
+    // background-color: rgba(rgb(219, 214, 214), 0.7) ;
+    width: 100%;
+
+    h1{
+        margin: 10;
+        padding: 5;
+        color: black;
+    }
+
+    .actions{
+        margin: 0;
+        padding: 10px;
+        // background-color: rgba(rgb(219, 214, 214),0.7)
+    }
+
+}
+
+.example-full-width{
+    width: 100%;
+    margin: 0;
+    padding: 10;
+}
+
+
+.close{
+    margin-right: 20px;
+color: black;
+//    background-color: rgb(92, 221, 171);
+}

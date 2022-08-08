@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-list>
+    <mat-list-item>First Name: {{ student.firstName }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Last Name: {{ student.lastName }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Matricule: {{ student.mat }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Gender: {{ student.gender }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Email: {{ student.email }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Phone: {{ student.phone }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Course: {{ student.course.courseName }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Level: {{ student.level.levelName }}</mat-list-item>
+  </mat-list>
+  <mat-divider></mat-divider>
+
+  <button mat-raised-button (click)="openStudentEditPage()">Edit</button>
+  <button mat-raised-button (click)="deleteAction()">Delete</button>
+  <button mat-button color="primary" (click)="showStudents()">
+    Back To Subjects
+  </button>
+</div>

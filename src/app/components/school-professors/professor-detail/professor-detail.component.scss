@@ -1,0 +1,24 @@
+.container {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    max-width: 800px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 20px;
+    margin: 10px auto;
+
+    mat-list {
+        mat-list-item {
+            color: black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 15px;
+        }
+    }
+
+    button {
+        margin: 10px;
+    }
+}
+
+.mat-divider {
+    border-top-color: rgba(0, 0, 0, 0.12);
+}

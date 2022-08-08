@@ -1,0 +1,65 @@
+.container{
+    width: 100%;
+    // margin: 0;
+    
+    // background-color: aliceblue;
+    .info{
+        
+        // background-color: rgb(241, 243, 245);
+        h3{
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding: 3px;
+        }
+    }
+
+
+    form{
+        .row2{
+            .col{
+            table {
+                    width: 100%;
+                    align-self: center;
+            
+                    tr {
+                        cursor: pointer;
+            
+                    }
+                }
+            
+           .mat-column-subjectName {
+               padding-left: 16px;
+            }
+
+                mat-form-field {
+                    width: 100%;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    
+}
+
+    .card {
+          margin: 0px 4px 4px 0px;
+            background-color: aliceblue;
+            color: black;
+            font-size: 17px;
+            position: relative;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            width: 100%;    
+    
+            .btn-remove {
+                position: absolute;
+                right: 10px;
+                top: 7px;
+                width: 80px;
+            }
+        }
+
+#sbj-container{
+   max-height: 400px;
+   overflow-y: scroll;
+//    background-color: yellow;
+}

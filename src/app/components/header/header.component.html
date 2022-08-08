@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+  <button
+    (click)="emitToggleEvent()"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <div class="entity-btns">
+    <button color="primary" mat-raised-button>
+      <a routerLink="/professors">Professors</a>
+    </button>
+    <button color="primary" mat-raised-button>
+      <a routerLink="/students">Students</a>
+    </button>
+    <button color="primary" mat-raised-button>
+      <a routerLink="/subjects">Subjects</a>
+    </button>
+    <button color="primary" mat-raised-button>
+      <a routerLink="/courses">Courses</a>
+    </button>
+
+    <button color="primary" mat-raised-button>
+      <a routerLink="/levels">Levels</a>
+    </button>
+  </div>
+  <span class="example-spacer"></span>
+  <button
+    color="primary"
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>

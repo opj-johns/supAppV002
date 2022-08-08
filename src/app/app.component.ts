@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'supAppV001';
+   @ViewChild('drawer') matDrawer!: MatDrawer;
+
+  toggleSideNav(){
+    this.matDrawer.toggle();
+  }
 }

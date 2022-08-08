@@ -1,0 +1,513 @@
+<div *ngIf="!view" class="container mt-2">
+  <form #form="ngForm">
+    <div class="row mb-2">
+      <div class="col-3 fs-6">{{ course.courseName }}</div>
+      <div class="col-sm-1 fs-5">
+        <label for="subject" class="form-label">Subject</label>
+      </div>
+      <div class="col-sm-5">
+        <select
+          #subjectSelect
+          disabled
+          name="subject"
+          class="form-select disabled"
+          id="subject"
+          [(ngModel)]="selectedSubjectId"
+          (ngModelChange)="onSubjectSelected(form)"
+        >
+          <option [value]="subject.id" *ngFor="let subject of subjects">
+            {{ subject.subjectName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-3 fs-6">{{ level.levelName }}</div>
+      <div class="col-sm-1 fs-5">
+        <label for="professor" class="form-label">Professor</label>
+      </div>
+      <div class="col-sm-5">
+        <select
+          #professorSelect
+          disabled
+          name="professor"
+          class="form-select"
+          id="professor"
+          [(ngModel)]="selectedProfessorId"
+        >
+          <option
+            [value]="professor.id"
+            *ngFor="let professor of displayedProfessors"
+          >
+            {{ professor.firstName }}&nbsp;{{ professor.lastName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-3"></div>
+      <div class="col-sm-1 fs-5">
+        <label for="classroom" class="form-label">Classroom</label>
+      </div>
+      <div class="col-sm-5">
+        <select
+          #classroomSelect
+          name="classroom"
+          class="form-select"
+          disabled
+          id="classroom"
+          [(ngModel)]="selectedClassroomId"
+          (ngModelChange)="enableAddButton()"
+        >
+          <option
+            [value]="classroom.id"
+            *ngFor="let classroom of displayedClassrooms"
+          >
+            {{ classroom.classRoomName }}
+          </option>
+        </select>
+      </div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-3"></div>
+      <div class="col-sm-1 fs-5">
+        <label for="position" class="form-label"> Position</label>
+      </div>
+      <div class="col-sm-2">
+        <select
+          name="position"
+          class="form-select"
+          id="position"
+          [(ngModel)]="selectedPosition"
+          (ngModelChange)="onPostionChange()"
+        >
+          <option [value]="position" *ngFor="let position of gridPositions">
+            {{ position }}
+          </option>
+        </select>
+      </div>
+      <div class="col-6">
+        <button
+          type="button"
+          #addButton
+          (click)="onAddButtonClicked(form)"
+          class="btn btn-primary px-4"
+          disabled
+        >
+          Add
+        </button>
+        <button
+          type="button"
+          #deleteButton
+          disabled
+          class="btn btn-danger mx-2"
+          (click)="onDeleteButtonClick()"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="container-fluid">
+  <table align="center">
+    <tbody>
+      <tr *ngIf="view" style="height: 60px">
+        <td colspan="11">
+          <H3 class="text-center mt-1">EMPLOI DU TEMPS - 1° SEMSTRE </H3>
+        </td>
+      </tr>
+      <tr *ngIf="view" style="height: 90px; border: 1px solid white">
+        <td colspan="11">
+          <H3 class="text-center mt-1 fs-4" style="font-weight: bolder"
+            ><span class="fs-3" style="font-weight: bolder">{{
+              course.courseName
+            }}</span>
+          </H3>
+          <p class="fs-5">
+            <span style="font-weight: bolder">{{ level.cycle }}</span>
+          </p>
+          <p class="fs-5">
+            Niveau :
+            <span style="font-weight: bolder"> {{ level.levelName }}</span>
+          </p>
+          <p class="fs-5">
+            Année Universitaire :
+            <span style="font-weight: bolder">2021/2022</span>
+          </p>
+        </td>
+      </tr>
+      <tr style="height: 20px; border: 1px solid white">
+        <td
+          colspan="1"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        ></td>
+        <td
+          colspan="1"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        ></td>
+        <td
+          colspan="1"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              color: rgb(236, 109, 109);
+            "
+          >
+            <div>8H00</div>
+            <div>10H00</div>
+          </div>
+        </td>
+        <td
+          colspan="1"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        ></td>
+        <td
+          colspan="1"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              color: rgb(236, 109, 109);
+            "
+          >
+            <div>10H15</div>
+            <div>11H45</div>
+          </div>
+        </td>
+        <td
+          colspan="3"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        ></td>
+        <td
+          colspan="1"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              color: rgb(236, 109, 109);
+            "
+          >
+            <div>14H00</div>
+            <div>15H30</div>
+          </div>
+        </td>
+        <td
+          colspan="1"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        ></td>
+        <td
+          colspan="1"
+          style="border-left: 1px solid white; border-right: 1px solid white"
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              color: rgb(236, 109, 109);
+            "
+          >
+            <div>15H45</div>
+            <div>17H15</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="days">LUNDI</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[0]" class="data">
+            <p>{{ timeTableList[0].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[0].professor.firstName }}&nbsp;{{
+                timeTableList[0].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[0].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[1]" class="data">
+            <p>{{ timeTableList[1].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[1].professor.firstName }}&nbsp;{{
+                timeTableList[1].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[1].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[2]" class="data">
+            <p>{{ timeTableList[2].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[2].professor.firstName }}&nbsp;{{
+                timeTableList[2].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[2].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[3]" class="data">
+            <p>{{ timeTableList[3].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[3].professor.firstName }}&nbsp;{{
+                timeTableList[3].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[3].classroom.classRoomName }}</p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="days">MARDI</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[4]" class="data">
+            <p>{{ timeTableList[4].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[4].professor.firstName }}&nbsp;{{
+                timeTableList[4].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[4].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[5]" class="data">
+            <p>{{ timeTableList[5].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[5].professor.firstName }}&nbsp;{{
+                timeTableList[5].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[5].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[6]" class="data">
+            <p>{{ timeTableList[6].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[6].professor.firstName }}&nbsp;{{
+                timeTableList[6].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[6].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[7]" class="data">
+            <p>{{ timeTableList[7].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[7].professor.firstName }}&nbsp;{{
+                timeTableList[7].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[7].classroom.classRoomName }}</p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="days">MERCREDI</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[8]" class="data">
+            <p>{{ timeTableList[8].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[8].professor.firstName }}&nbsp;{{
+                timeTableList[8].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[8].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[9]" class="data">
+            <p>{{ timeTableList[9].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[9].professor.firstName }}&nbsp;{{
+                timeTableList[9].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[9].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[10]" class="data">
+            <p>{{ timeTableList[10].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[10].professor.firstName }}&nbsp;{{
+                timeTableList[10].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[10].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[11]" class="data">
+            <p>{{ timeTableList[11].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[11].professor.firstName }}&nbsp;{{
+                timeTableList[11].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[11].classroom.classRoomName }}</p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="days">JEUDI</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[12]" class="data">
+            <p>{{ timeTableList[12].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[12].professor.firstName }}&nbsp;{{
+                timeTableList[12].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[12].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[13]" class="data">
+            <p>{{ timeTableList[13].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[13].professor.firstName }}&nbsp;{{
+                timeTableList[13].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[13].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[14]" class="data">
+            <p>{{ timeTableList[14].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[14].professor.firstName }}&nbsp;{{
+                timeTableList[14].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[14].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[15]" class="data">
+            <p>{{ timeTableList[15].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[15].professor.firstName }}&nbsp;{{
+                timeTableList[15].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[15].classroom.classRoomName }}</p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="days">VENDREDI</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[16]" class="data">
+            <p>{{ timeTableList[16].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[16].professor.firstName }}&nbsp;{{
+                timeTableList[16].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[16].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[17]" class="data">
+            <p>{{ timeTableList[17].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[17].professor.firstName }}&nbsp;{{
+                timeTableList[17].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[17].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[18]" class="data">
+            <p>{{ timeTableList[18].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[18].professor.firstName }}&nbsp;{{
+                timeTableList[18].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[18].classroom.classRoomName }}</p>
+          </div>
+        </td>
+        <td class="spacer">&nbsp;</td>
+        <td class="tb-data">
+          <div *ngIf="!noData[19]" class="data">
+            <p>{{ timeTableList[19].subject.subjectName }}</p>
+            <p>
+              {{ timeTableList[19].professor.firstName }}&nbsp;{{
+                timeTableList[19].professor.lastName
+              }}
+            </p>
+            <p>{{ timeTableList[19].classroom.classRoomName }}</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-grid gap-2 mt-3">
+    <button
+      class="btn btn-outline-primary"
+      (click)="onSaveButtonClicked()"
+      *ngIf="!view"
+      type="button"
+    >
+      Save
+    </button>
+    <button
+      class="btn btn-outline-primary"
+      *ngIf="view"
+      (click)="onUpdateButtonClicked()"
+      type="button"
+    >
+      Update
+    </button>
+    <button class="btn btn-outline-primary" type="button">Print</button>
+    <button class="btn btn-outline-danger" type="button">Delete</button>
+  </div>
+</div>

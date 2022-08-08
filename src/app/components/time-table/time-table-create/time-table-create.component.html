@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="info">
+    <h3 class="text-center fs-5">Create time table in some few steps</h3>
+  </div>
+
+  <form #classSubjectsForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <div class="row mb-3">
+          <label for="course" class="col-sm-2 col-form-label">Course</label>
+          <div class="col-sm-10">
+            <select
+              id="course"
+              [(ngModel)]="selectedCourseId"
+              class="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              name="selectedCourseId"
+            >
+              <option selected>Select a course</option>
+              <option [value]="course.id" *ngFor="let course of courses">
+                {{ course.courseName }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row mb-3">
+          <label for="level" class="col-sm-2 col-form-label">Level</label>
+          <div class="col-sm-10">
+            <select
+              id="level"
+              [(ngModel)]="selectedLevelId"
+              class="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              name="selectedLevelId"
+            >
+              <option selected>Select a level</option>
+              <option [value]="level.id" *ngFor="let level of levels">
+                {{ level.levelName }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-start text-uppercase fs-6">All Subjects available</p>
+      </div>
+      <div class="col">
+        <p class="text-start text-uppercase fs-6">
+          Selected subjects for ... ...
+        </p>
+      </div>
+    </div>
+    <div class="row row2">
+      <div class="col">
+        <mat-form-field appearance="outline">
+          <mat-label>Filter</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Search for subject"
+            #input
+          />
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Name Column -->
+          <ng-container matColumnDef="subjectName">
+            <th mat-header-cell *matHeaderCellDef>Subject</th>
+            <td mat-cell *matCellDef="let subject">
+              {{ subject.subjectName }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            (click)="addToSelectedSubjects(row)"
+            *matRowDef="let row; columns: displayedColumns"
+          ></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No data matching the filter "{{ input.value }}"
+            </td>
+          </tr>
+        </table>
+        <mat-paginator
+          #paginator
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          pageSize="5"
+          showFirstLastButtons
+          aria-label="Select page of users"
+        >
+        </mat-paginator>
+      </div>
+      <div class="col" id="sbj-container">
+        <div
+          *ngIf="
+            selectedSubjects.length > 0;
+            then moreSubjects;
+            else noSubjects
+          "
+        ></div>
+        <ng-template #moreSubjects>
+          <mat-card class="card" *ngFor="let subject of selectedSubjects"
+            >{{ subject.subjectName }}
+            <button
+              class="btn-remove"
+              (click)="removeSubject(subject)"
+              mat-raised-button
+              color="accent"
+            >
+              x
+            </button>
+          </mat-card>
+        </ng-template>
+        <ng-template #noSubjects>
+          <p class="text-center fs-5">No subjects have been selected</p>
+        </ng-template>
+      </div>
+    </div>
+  </form>
+  <div class="row m-2">
+    <div class="col d-grid">
+      <button
+        class="btn btn-primary"
+        (click)="saveClassSubjects()"
+        type="button"
+        *ngIf="!savedSuccessfully"
+      >
+        Save class subjects
+      </button>
+    </div>
+    <div class="col d-grid" *ngIf="savedSuccessfully">
+      <button
+        class="btn btn-primary"
+        (click)="goToTimeTableSheet()"
+        type="button"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

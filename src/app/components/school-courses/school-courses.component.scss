@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    justify-content: center;
+
+    .card {
+        background-color: aliceblue;
+        color: black;
+        font-size: 17px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        width: 50%;
+        
+        margin-bottom: 10px;
+        position: relative;
+        .btn-edit{
+            position: absolute;
+            top: 7px;
+            right: 10px;
+
+        }
+    }
+
+    .btn-new{
+        margin-bottom: 10px;
+    }
+}
