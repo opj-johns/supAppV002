@@ -1,7 +1,145 @@
 <div class="container">
   <h2>Attendance Operations</h2>
   <div class="operations">
-    <p><a routerLink="/attendance/take">Take Attendance</a></p>
-    <p><a>View Attendance Record</a></p>
+    <p><a (click)="openAuthDialog()">Take Attendance</a></p>
+    <p><a>Create weekly attendance</a></p>
   </div>
+  <h2>Created Weekly Attendances</h2>
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item
+      *ngFor="
+        let level of createdWeeklyAttendances.levels;
+        let levelIndex = index
+      "
+      #levelItem="cdkAccordionItem"
+      class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      [attr.id]="'accordion-header-' + levelIndex"
+      [attr.aria-expanded]="levelItem.expanded"
+      [attr.aria-controls]="'accordion-body-' + levelIndex"
+    >
+      <div class="example-accordion-item-header" (click)="levelItem.toggle()">
+        {{ level.level.levelName }}
+        <span class="example-accordion-item-description">
+          Click to {{ levelItem.expanded ? "close" : "open" }}
+        </span>
+      </div>
+      <div
+        class="example-accordion-item-body"
+        role="region"
+        [style.display]="levelItem.expanded ? '' : 'none'"
+        [attr.id]="'accordion-body-' + levelIndex"
+        [attr.aria-labelledby]="'accordion-header-' + levelIndex"
+      >
+        <cdk-accordion style="width: 60%; background-color: azure; z-index: 3">
+          <cdk-accordion-item
+            *ngFor="let course of level.courses; let courseIndex = index"
+            #courseItem="cdkAccordionItem"
+            class="example-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'accordion-header-' + courseIndex"
+            [attr.aria-expanded]="courseItem.expanded"
+            [attr.aria-controls]="'accordion-body-' + courseIndex"
+          >
+            <div
+              class="example-accordion-item-header"
+              (click)="courseItem.toggle()"
+            >
+              {{ course.course.courseName }}
+              <span class="example-accordion-item-description">
+                Click to {{ courseItem.expanded ? "close" : "open" }}
+              </span>
+            </div>
+            <div
+              class="example-accordion-item-body"
+              role="region"
+              [style.display]="courseItem.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + courseIndex"
+              [attr.aria-labelledby]="'accordion-header-' + courseIndex"
+            >
+              <cdk-accordion
+                style="width: 50%; background-color: bisque; z-index: 5"
+              >
+                <cdk-accordion-item
+                  *ngFor="let month of course.months; let monthIndex = index"
+                  #monthItem="cdkAccordionItem"
+                  class="example-accordion-item"
+                  role="button"
+                  tabindex="0"
+                  [attr.id]="'accordion-header-' + monthIndex"
+                  [attr.aria-expanded]="monthItem.expanded"
+                  [attr.aria-controls]="'accordion-body-' + monthIndex"
+                >
+                  <div
+                    class="example-accordion-item-header"
+                    (click)="monthItem.toggle()"
+                  >
+                    {{ month.month.signature }}
+                    <span class="example-accordion-item-description">
+                      Click to {{ monthItem.expanded ? "close" : "open" }}
+                    </span>
+                  </div>
+                  <div
+                    class="example-accordion-item-body"
+                    role="region"
+                    [style.display]="monthItem.expanded ? '' : 'none'"
+                    [attr.id]="'accordion-body-' + monthIndex"
+                    [attr.aria-labelledby]="'accordion-header-' + monthIndex"
+                  >
+                    <p *ngFor="let week of month.weeks">
+                      <a href="#">
+                        {{ week.signature }}
+                      </a>
+                    </p>
+                  </div>
+                </cdk-accordion-item>
+              </cdk-accordion>
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
 </div>
+
+<!--
+
+  <cdk-accordion style="width: 50%">
+          <cdk-accordion-item
+            *ngFor="let month of course.months; let monthIndex = index"
+            #monthItem="cdkAccordionItem"
+            class="example-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'accordion-header-' + monthIndex"
+            [attr.aria-expanded]="monthItem.expanded"
+            [attr.aria-controls]="'accordion-body-' + monthIndex"
+          >
+            <div
+              class="example-accordion-item-header"
+              (click)="monthItem.toggle()"
+            >
+              {{ month.month.signature }} 
+              <span class="example-accordion-item-description">
+                Click to {{ monthItem.expanded ? "close" : "open" }}
+              </span>
+            </div>
+            <div
+              class="example-accordion-item-body"
+              role="region"
+              [style.display]="monthItem.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + monthIndex"
+              [attr.aria-labelledby]="'accordion-header-' + monthIndex"
+            >
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Perferendis excepturi incidunt ipsum deleniti labore, tempore non
+              nam doloribus blanditiis veritatis illo autem iure aliquid ullam
+              rem tenetur deserunt velit culpa?
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+
+
+-->

@@ -1,0 +1,23 @@
+<div class="container">
+  <table>
+    <thead>
+      <th>Matricule</th>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th *ngFor="let subject of weeklyAttendanceSheet.subjects">
+        {{ subject.subjectName }}
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of weeklyAttendanceSheet.rows">
+        <td>{{ row.student.mat }}</td>
+        <td>{{ row.student.lastName }}</td>
+        <td>{{ row.student.firstName }}</td>
+        <td *ngFor="let state of row.states">
+          <div *ngIf="state === 0">A</div>
+          <div *ngIf="state === 1">P</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -8,7 +8,7 @@ import { StudentNewComponent } from 'src/app/components/school-students/student-
 const routes: Routes = [
   {path:'', component: SchoolStudentsComponent},
   {path:'new', component: StudentNewComponent},
-  {path:'student/edit/:id', component: StudentEditComponent},
+  {path:'edit/:id', component: StudentEditComponent},
   {path:'detail/:id', component: StudentDetailComponent}
 ];
 

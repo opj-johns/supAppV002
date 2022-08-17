@@ -20,6 +20,10 @@ export class ProfessorService {
     return this.httpClient.get<Professor>(`${this.baseUrl}/professor/${professorId}`);
   }
 
+  getProfessorByPassword(password: string):Observable<Professor>{
+    return this.httpClient.post<Professor>(`${this.baseUrl}/professor/p_pwd`, password);
+  }
+
   updateProfesssor(professor: Professor): Observable<Professor>{
     return this.httpClient.put<Professor>(`${this.baseUrl}/professor/update`, professor);
   }
@@ -28,4 +32,6 @@ export class ProfessorService {
   savaProfessor(professor: Professor): Observable<Professor>{
     return this.httpClient.put<Professor>(`${this.baseUrl}/professor/add`, professor);
   }
+
+  
 }

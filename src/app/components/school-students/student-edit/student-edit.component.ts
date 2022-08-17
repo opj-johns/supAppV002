@@ -17,6 +17,8 @@ export class StudentEditComponent implements OnInit {
   student!: Student;
   levels!: Level[];
   courses!: Course[];
+  selectedCourseId!: number;
+  selectedLevelId!:number;
 
   constructor(private studentService: StudentService, private router: Router, private activatedRoute: ActivatedRoute, private courseService: CourseService,
     private levelService: LevelService) { }
@@ -85,21 +87,24 @@ export class StudentEditComponent implements OnInit {
     // and level field also contains levelId in string format
     // we have to use those Ids to retreive their objects from the courses and levels list then set them into the student object 
 
-    let courseId = Number(this.student.course);
-    let course = this.courses.find(course => course.id === courseId);
-    console.log(`successfully found course in courses list`, course);
+    let courseId = Number(this.selectedCourseId);
 
-    let levelId = Number(this.student.level);
-    let level = this.levels.find(level => level.id === levelId);
-    console.log(`successfully found level in courses list`, level);
+    let levelId = Number(this.selectedLevelId);
 
-    if(course !== undefined && level !== undefined){
-      this.student.course = course;
-      this.student.level = level;
+    if(courseId !== NaN && levelId !== NaN){
+      this.student.course.id = courseId;
+      this.student.course.courseName = '';
+
+      this.student.level.id = levelId;
+      this.student.level.levelName = '';
+      this.student.level.cycle = '';
     }
+    console.log(this.student.course, this.student.level);
     console.log(`final state of student to be saved to database`, this.student);
   }
 
 
-
+  cancel(){
+    this.router.navigateByUrl(`/students/detail/${this.student.id}`);
+  }
 }

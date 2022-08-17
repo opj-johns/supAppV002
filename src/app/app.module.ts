@@ -21,6 +21,9 @@ import { CourseService } from './services/course.service';
 import { AttendanceService } from './services/attendance.service';
 import { TimeTableService } from './services/time-table.service'
 import { ClassroomService } from './services/classroom.service';
+import { AttendanceAuthComponent } from './components/attendance/attendance-auth/attendance-auth.component';
+import { CreateWeeklyAttendaceComponent } from './components/attendance/weekly-attendance/create-weekly-attendace/create-weekly-attendace.component';
+
 
 
 
@@ -34,6 +37,8 @@ import { ClassroomService } from './services/classroom.service';
     EditComponent,
     NewComponent,
     SubjectDetailComponent,
+    AttendanceAuthComponent,
+    CreateWeeklyAttendaceComponent,
     
   ],
   imports: [

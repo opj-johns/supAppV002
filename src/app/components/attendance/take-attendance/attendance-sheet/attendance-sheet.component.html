@@ -1,95 +1,56 @@
-<div class="constainer">
-  <h2>Attendance Sheet</h2>
-  <section class="att-info">
-    <h3>Sheet Details</h3>
-    <table>
+<div class="container col-12">
+  <div class="row mb-2 p-2">
+    <div class="col-4 fs-6">Time: 12:00</div>
+    <div class="col-4 fs-6">
+      Signé par: {{ professor.firstName }}&nbsp;{{ professor.lastName }}
+    </div>
+    <div class="col-4 fs-6">Date: 12/12/12</div>
+  </div>
+</div>
+<div class="container col-8">
+  <div class="row mb-2">Cycle : {{ level.cycle }}</div>
+  <div class="row mb-2">Niveau : {{ level.levelName }}</div>
+  <div class="row mb-2">
+    Filère: {{ course.courseName }}
+    <div class="row mb-2">Promotion: 2021/2022</div>
+  </div>
+
+  <div class="container">
+    <table align="center">
+      <thead>
+        <tr>
+          <th>Matricule</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Etat</th>
+        </tr>
+      </thead>
       <tbody>
-        <tr>
-          <td>Professor</td>
-          <td>{{ professor.firstName }}&nbsp;&nbsp;{{ professor.lastName }}</td>
-        </tr>
-        <tr>
-          <td>Course</td>
-          <td>{{ course.courseName }}</td>
-        </tr>
-        <tr>
-          <td>Level</td>
-          <td>{{ level.levelName }}</td>
-        </tr>
-        <tr>
-          <td>Subject</td>
+        <tr *ngFor="let student of students; let index = index">
+          <td class="mat">20 {{ student.mat }}</td>
+          <td>{{ student.lastName }}</td>
+          <td>{{ student.firstName }}</td>
           <td>
-            <div
-              *ngIf="
-                noOfSubjectsTaught === 0;
-                then noSubject;
-                else subjectExist
-              "
-            ></div>
-
-            <ng-template #subjectExist>
-              <div
-                *ngIf="
-                  noOfSubjectsTaught === 1;
-                  then oneSubject;
-                  else moreSubjects
-                "
-              ></div>
-              <ng-template #oneSubject>
-                <p *ngFor="let subject of professor.subjectsTaught">
-                  {{ subject.subjectName }}
-                </p>
-              </ng-template>
-
-              <ng-template #moreSubjects>
-                <select
-                  class="form-select"
-                  [(ngModel)]="subjectId"
-                  aria-label="Default select example"
-                >
-                  <option
-                    [value]="subject.id"
-                    *ngFor="let subject of professor.subjectsTaught"
-                  >
-                    {{ subject.subjectName }}
-                  </option>
-                </select>
-              </ng-template>
-            </ng-template>
-            <ng-template #noSubject>
-              You have no subjects teaching
-            </ng-template>
+            <select
+              name="presence"
+              id="presence"
+              [(ngModel)]="selectedState[index]"
+              (ngModelChange)="onSelect(index, student.id)"
+            >
+              <option [value]="absent"></option>
+              <option [value]="student.id">Présent</option>
+              <option [value]="absent">Absent</option>
+            </select>
           </td>
         </tr>
       </tbody>
     </table>
-  </section>
-  <div class="att-state">
-    <div class="absent">
-      <h3>Absent students</h3>
-
-      <div class="list">
-        <mat-card
-          (click)="sendToPresentList(absentStudent)"
-          *ngFor="let absentStudent of absentStudents"
-          >{{ absentStudent.firstName }}&nbsp;&nbsp;{{
-            absentStudent.lastName
-          }}</mat-card
-        >
-      </div>
-    </div>
-    <div class="present">
-      <h3>Present students</h3>
-      <div class="list">
-        <mat-card
-          (click)="sendToAbsentList(presentStudent)"
-          *ngFor="let presentStudent of presentStudents"
-          >{{ presentStudent.firstName }}&nbsp;&nbsp;{{
-            presentStudent.lastName
-          }}</mat-card
-        >
-      </div>
-    </div>
   </div>
-  <p><a (click)="recordAttendanceSheet()">Record Attendance</a></p>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="recordAttendanceSheet()">
+      Submit Attendance
+    </button>
+    <button mat-raised-button color="warn" disabled>Cancel Attendance</button>
+  </div>
 </div>

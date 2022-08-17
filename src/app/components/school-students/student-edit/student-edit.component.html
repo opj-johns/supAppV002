@@ -99,7 +99,7 @@
           class="form-control"
           id="course"
           required
-          [(ngModel)]="student.course"
+          [(ngModel)]="selectedCourseId"
           name="course"
         >
           <option [value]="course.id" *ngFor="let course of courses">
@@ -111,7 +111,13 @@
     <div class="row mb-3">
       <label for="level" class="col-sm-2 col-form-label">Level</label>
       <div class="col-sm-10">
-        <select name="level" id="level" required [(ngModel)]="student.level">
+        <select
+          name="level"
+          id="level"
+          required
+          class="form-control"
+          [(ngModel)]="selectedLevelId"
+        >
           <option [value]="level.id" *ngFor="let level of levels">
             {{ level.levelName }}
           </option>
@@ -120,6 +126,6 @@
     </div>
     <button mat-raised-button type="sumit">Update</button>
     <button mat-raised-button type="reset">Reset</button>
-    <button mat-raised-button>Cancel</button>
+    <button mat-raised-button (click)="cancel()">Cancel</button>
   </form>
 </div>

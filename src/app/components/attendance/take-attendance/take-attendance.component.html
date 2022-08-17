@@ -1,23 +1,12 @@
-<div class="container">
-  <h2>Fill the datails below to retreive an attendance sheet</h2>
+<div class="container-sm col-8">
+  <h2 class="text-center">
+    Welcome back
+    <strong>{{ professor.firstName }}&nbsp;{{ professor.lastName }}</strong>
+  </h2>
+  <p class="text-center fs-6">
+    Please make the following selections to proceed.
+  </p>
   <form #takeAttendanceForm="ngForm">
-    <div class="row mb-3">
-      <label for="professor" class="col-sm-2 col-form-label">Professor</label>
-      <div class="col-sm-10">
-        <select
-          class="form-select form-select-sm"
-          name="professor"
-          id="professor"
-          required
-          [(ngModel)]="selectedProfessorID"
-        >
-          <option [value]="professor.id" *ngFor="let professor of professors">
-            {{ professor.firstName }}&nbsp;&nbsp;{{ professor.lastName }}
-          </option>
-        </select>
-      </div>
-    </div>
-
     <div class="row mb-3">
       <label for="course" class="col-sm-2 col-form-label">Course</label>
       <div class="col-sm-10">
@@ -30,6 +19,26 @@
         >
           <option [value]="course.id" *ngFor="let course of courses">
             {{ course.courseName }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="subject" class="col-sm-2 col-form-label">Subject</label>
+      <div class="col-sm-10">
+        <select
+          class="form-select form-select-sm"
+          name="subject"
+          id="subject"
+          required
+          [(ngModel)]="selectedSubjectId"
+        >
+          <option
+            [value]="subject.id"
+            *ngFor="let subject of professor.subjectsTaught"
+          >
+            {{ subject.subjectName }}
           </option>
         </select>
       </div>

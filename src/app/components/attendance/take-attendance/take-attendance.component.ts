@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/app/models/course';
 import { Level } from 'src/app/models/level';
 import { Professor } from 'src/app/models/professor';
@@ -23,8 +23,9 @@ export class TakeAttendanceComponent implements OnInit {
   selectedCourse!: Course;
   selectedProfessor!: Professor;
   selectedLevel!: Level;
-  
-
+  professor!: Professor;
+  selectedSubjectId!:number;
+  professorId!:number;
   professors: Professor[]=[];
   courses: Course[] = [];
   levels: Level[]=[];
@@ -32,10 +33,17 @@ export class TakeAttendanceComponent implements OnInit {
   constructor(private professorService: ProfessorService,
               private courseService: CourseService,
               private levelService: LevelService,
-              private router: Router) { }
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.fetchProfessors();
+    let id = Number(this.activatedRoute.snapshot.paramMap.get('profId'))
+    if(id!==NaN){
+      this.professorId = id;
+    }else{
+      console.log(`Could not convert profId from route param into number`);
+    }
+    this.fetctProfessor();
     this.fetchCourses();
     this.fetchLevels();
   }
@@ -45,29 +53,31 @@ export class TakeAttendanceComponent implements OnInit {
   goToAttendanceSheet(){
   if(this.selectedLevelID!== undefined&&
      this.selectedCourseID!== undefined&&
-     this.selectedProfessorID!==undefined){
-      this.router.navigateByUrl(`attendance/take/${this.selectedProfessorID}/${this.selectedCourseID}/${this.selectedLevelID}`);
+     this.selectedSubjectId!==undefined){
+      this.router.navigateByUrl(`attendance/sheet/${this.professorId}/${this.selectedCourseID}/${this.selectedLevelID}/${this.selectedSubjectId}`);
      }else{
-      console.log(`unsatisfied route parameters for attendance sheet page`);
+       console.log(`unsatisfied route parameters for attendance sheet page`);
+       alert("Please select all the fields to proceed");
      }
-
-  console.log(this.takeAttendanceForm.value);
-  console.log(`selectedCourseID`,this.selectedCourseID);
-  console.log(`selectedProfessorID`,this.selectedProfessorID);
-  console.log(`selectedLevelID`,this.selectedLevelID);
+  
+  // console.log(this.takeAttendanceForm.value);
+  // console.log(`selectedCourseID`,this.selectedCourseID);
+  // console.log(`selectedProfessorID`,this.selectedProfessorID);
+  // console.log(`selectedLevelID`,this.selectedLevelID);
   }
 
-  fetchProfessors(){
-    this.professorService.getAllProfessors().subscribe({
-      next: (profs )=>{
-        console.log(`successfully fetched all professors for take attendance page`, profs);
-        this.professors = profs;
+  
+  fetctProfessor(){
+    this.professorService.getProfessor(this.professorId).subscribe({
+      next:(resp)=>{
+        this.professor = resp;
+        console.log(`fetched prof for take attendance page`, resp);
       },
-      error: (err) =>{
-         console.log(`Failed to fetch professors for take attendance page`, err);
-      }
+      error:(err)=>{console.log(`Error fetching prof for take attendance page`, err);
+    }
     })
   }
+
 
   fetchCourses(){
     this.courseService.getAllCoures().subscribe({

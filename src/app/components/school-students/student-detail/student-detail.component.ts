@@ -11,24 +11,24 @@ import { StudentService } from 'src/app/services/student.service';
 export class StudentDetailComponent implements OnInit {
 
   student!: Student;
-
+  studentId!:number;
   constructor(private route: Router, private activatedRoute: ActivatedRoute, private studentService: StudentService) { }
 
   ngOnInit(): void {
+    this.studentId = Number(this.activatedRoute.snapshot.paramMap.get("id"));
     this.getStudent();
   }
 
   getStudent(){
-    let studentId = Number(this.activatedRoute.snapshot.paramMap.get("id"));
-    if(studentId !== undefined){
+    if(this.studentId !== undefined){
 
-      this.studentService.fetchStudent(studentId).subscribe(
+      this.studentService.fetchStudent(this.studentId).subscribe(
         student =>{
           this.student = student;
           console.log(`successfully fetched student ${this.student}`)
         }, 
         error=>{
-          console.log(`Failed to fetch student with id ${studentId}, error:${error}`);
+          console.log(`Failed to fetch student with id ${this.studentId}, error:${error}`);
         }
       )
     }else{
@@ -41,15 +41,15 @@ export class StudentDetailComponent implements OnInit {
   }
 
   openStudentEditPage(){ 
-     let studentId = Number(this.activatedRoute.snapshot.paramMap.get("id"));
-    if(studentId !== undefined){
-      this.route.navigateByUrl(`/students/edit/${studentId}`);
+    if(this.studentId !== undefined){
+      this.route.navigateByUrl(`/students/edit/${this.studentId}`);
     }else{
       console.log(`student id is undefined while fetching student for detail page`);
     }
   }
 
   deleteAction(){
-    
-  }
+     this.studentService.deleteStudent(this.studentId);
+     alert("successfully deleted student");
+  } 
 }

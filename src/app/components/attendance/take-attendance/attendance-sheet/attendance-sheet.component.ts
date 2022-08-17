@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/app/models/course';
 import { Level } from 'src/app/models/level';
 import { Professor } from 'src/app/models/professor';
@@ -10,94 +10,92 @@ import { CourseService } from 'src/app/services/course.service';
 import { LevelService } from 'src/app/services/level.service';
 import { ProfessorService } from 'src/app/services/professor.service';
 import { StudentService } from 'src/app/services/student.service';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-attendance-sheet',
   templateUrl: './attendance-sheet.component.html',
   styleUrls: ['./attendance-sheet.component.scss']
 })
-export class AttendanceSheetComponent implements OnInit ,AfterViewInit{
+export class AttendanceSheetComponent implements OnInit {
 
-  absentStudents!: Student[];
-  presentStudents: Student[]=[];
   professor!: Professor;
   subject!: Subject;
-  subjectId!: number; 
   level!: Level;
   course!:Course;
-  noOfSubjectsTaught: number=0;
-
+  absent:string = '-2';
+  students: Student[]=[];
+  selectedState: string[]=[];
+  selectedStudentIds: number[]=[]; 
+  courseId!:number;
+  levelId!:number;
+  professorId!:number;
+  subjectId!:number;
 
   constructor(private professorService: ProfessorService,
               private studentService: StudentService,
               private courseService: CourseService,
               private levelService: LevelService,
               private activatedRoute: ActivatedRoute,
-              private attendanceService: AttendanceService) { }
+              private attendanceService: AttendanceService,
+              private subjectService: SubjectService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.getLevel();
-    this.getCourse();
-    this.fetchProfessor();
+      this.fetchRouteParams();
+     this.getLevel();
+     this.getCourse();
+     this.fetchProfessor();
+     this.fetchSubject();
+     this.fetchClassStudents();
   }
 
-  ngAfterViewInit(): void {
-    this.fetchAbsentStudent();
-   
+  fetchRouteParams(){
+    this.courseId = Number(this.activatedRoute.snapshot.paramMap.get("courseId"));
+    this.levelId = Number(this.activatedRoute.snapshot.paramMap.get("levelId"));
+    this.professorId = Number(this.activatedRoute.snapshot.paramMap.get("profId"));
+    this.subjectId = Number(this.activatedRoute.snapshot.paramMap.get("subjId"));
   }
 
-  sendToPresentList(student: Student){
-    console.log("sendToPresentList called hello");
-    
-      console.log( this.presentStudents.push(student));
-    
-      console.log("sendToPresentList called");
-      let index = this.absentStudents.indexOf(student);
-       console.log('index of ', student,'is',index);
- 
-      this.absentStudents.splice(index,1);
-  }
+  
+  onSelect(indexofId: number, studentId: number){
+      let studId = Number(this.selectedState[indexofId]);
 
-  sendToAbsentList(student: Student){
-    console.log("sendToAbsentList called")
-    
-      this.absentStudents.push(student);
-       let index = this.presentStudents.indexOf(student);
-       console.log('index of ', student,'is',index);
-      this.presentStudents.splice(index,1);
-  }
-
-  setNumberOfSubjects(){
-  if(this.professor.subjectsTaught?.length !== undefined){
-     this.noOfSubjectsTaught = this.professor.subjectsTaught.length; 
-     console.log(this.professor.subjectsTaught?.length );
-   }else{
-    console.log(this.professor, " has undefined number of subjects taught");
-   }
-  }
-
-
-  fetchAbsentStudent(){
-   
-     this.studentService.fetchClassOfStudent(this.course, this.level).subscribe({
-      next: (respStudents)=>{
-        console.log(`successfully loaded class of students for attendance sheet page`, respStudents);
-        this.absentStudents = respStudents;
-      },
-      error: (err)=>{
-        console.log(`failed to load class of students for attendance sheet page`, err);
+      if(studId === -2){
+         alert("Not a number");
+         // if student is added to already, remove it 
+          let index = this.selectedStudentIds.findIndex(x=> x === studentId);
+          if(index!==-1){
+             this.selectedStudentIds.splice(index,1);
+          } 
+          console.log(this.selectedStudentIds);
+          return;
       }
-     })
+      // if studentId is not added already, add it
+      if(studentId === studId){
+          let index2 = this.selectedStudentIds.findIndex(x=>x===studentId);
+          if(index2===-1){
+            this.selectedStudentIds.push(studentId);
+          }
+          console.log(this.selectedStudentIds);
+      }
   }
-
 
   recordAttendanceSheet(){  
-     console.log(this.subject);
+    console.log(this.subject);
     console.log(this.professor);
-    console.log(this.presentStudents);
-    this.attendanceService.recordAttendance(this.professor, this.subject, this.presentStudents).subscribe({
+    let studentsPresent: Student[] = [];
+    this.selectedStudentIds.forEach(studentId =>{
+      let student = new Student();
+      student.id = studentId;
+      studentsPresent.push(student);
+    })
+     console.log(`students present`, studentsPresent);
+    this.attendanceService.recordAttendance(this.professor, this.subject, studentsPresent).subscribe({
       next:(resp)=>{
         console.log(`successfully recorded attendance sheet`, resp);
+        alert(`Successfully recorded ${studentsPresent.length}`);
+        this.router.navigateByUrl('attendance');
       },
       error: (err)=>{
         console.log(`failed to record attendance sheet`, err);
@@ -107,16 +105,12 @@ export class AttendanceSheetComponent implements OnInit ,AfterViewInit{
 
 
   fetchProfessor(){
-    let professorId = Number(this.activatedRoute.snapshot.paramMap.get("profId"));
-    if(professorId !== undefined){
-      this.professorService.getProfessor(professorId).subscribe({
+    if(this.professorId !== undefined){
+      this.professorService.getProfessor(this.professorId).subscribe({
         next:(prof)=>{
           this.professor = prof;
           console.log(`successfully fetched professor for attendance sheet page`, this.professor);
-          this.setNumberOfSubjects();
-          if(prof.subjectsTaught?.length===1){
-             this.subject = prof.subjectsTaught[0];
-          }
+         
         },
         error:(err)=>{
           console.log(`failed to fetch professor for attendance sheet page `, err);
@@ -128,10 +122,13 @@ export class AttendanceSheetComponent implements OnInit ,AfterViewInit{
   }
 
   fetchClassStudents(){
+     this.course = {id: this.courseId, courseName:''};
+     this.level = { id: this.levelId, levelName: '', cycle:''};
+
     if(this.course !== undefined && this.level !== undefined){
       this.studentService.fetchClassOfStudent(this.course, this.level).subscribe({
         next: (respStudents)=>{
-          this.absentStudents = respStudents;
+          this.students = respStudents;
           console.log(`successfully fetched class of student for attendance sheet page`, respStudents);
 
         }, 
@@ -145,9 +142,8 @@ export class AttendanceSheetComponent implements OnInit ,AfterViewInit{
   }
   
   getCourse(){
-    let courseId = Number(this.activatedRoute.snapshot.paramMap.get('courseId'));
-    if(courseId!== undefined){
-      this.courseService.fetchCourse(courseId).subscribe({
+    if(this.courseId!== undefined){
+      this.courseService.fetchCourse(this.courseId).subscribe({
         next: (respCourse)=>{
           this.course = respCourse;
           console.log(`successfully fetched course for attendance sheet page`, this.course);
@@ -163,9 +159,8 @@ export class AttendanceSheetComponent implements OnInit ,AfterViewInit{
 
   getLevel(){
     console.log(`get level method is called`);
-    let levelId = Number(this.activatedRoute.snapshot.paramMap.get('levelId'));
-    if(levelId !== undefined){
-      this.levelService.fetchLevel(levelId).subscribe({
+    if( this.levelId !== undefined ){
+      this.levelService.fetchLevel(this.levelId).subscribe({
         next: (respLevel)=>{
           this.level = respLevel;
           console.log(`successfully fetched level for attendance sheet page`, this.level);
@@ -174,6 +169,19 @@ export class AttendanceSheetComponent implements OnInit ,AfterViewInit{
     }else{
       console.log(`level id of route parameter is undefined. Cannot fetch level for attendance sheet page`);
     }
+  }
+
+  fetchSubject(){
+    let subjectId = Number(this.activatedRoute.snapshot.paramMap.get('subjId'));
+    this.subjectService.getSubject(subjectId).subscribe({
+      next:(resp)=>{
+        this.subject = resp;
+      },
+      error:(err)=>{
+        console.log(`Error fetching subject for attendance sheet page`,err);
+      }
+    })
+    
   }
 
 }

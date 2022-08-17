@@ -1,0 +1,35 @@
+<h2 mat-dialog-title align="center">Professor Verification</h2>
+<div>
+  <mat-form-field
+    mat-dialog-content
+    class="example-full-width"
+    appearance="fill"
+  >
+    <mat-label>Enter password</mat-label>
+    <input
+      type="password"
+      matInput
+      [(ngModel)]="password"
+      #message
+      maxlength="10"
+      placeholder="password"
+    />
+    <mat-hint align="start"
+      ><strong>Don't disclose personal info</strong>
+    </mat-hint>
+    <mat-hint align="end">{{ message.value.length }} / 10</mat-hint>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close color="warn" class="btn-cancel">
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      cdkFocusInitial
+      (click)="onVerify()"
+    >
+      Verify
+    </button>
+  </div>
+</div>
