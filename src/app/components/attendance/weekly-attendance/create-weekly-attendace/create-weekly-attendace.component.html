@@ -1,1 +1,92 @@
-<p>create-weekly-attendace works!</p>
+<h2 class="text-center">Create weekly Attendance sheet</h2>
+<form #form="ngForm" (ngSubmit)="createWeekAttendanceSheet(form)">
+  <div class="mb-3 row">
+    <label for="course" class="col-sm-2 col-form-label">Course</label>
+    <div class="col-sm-6 mb-2">
+      <select
+        name="course"
+        required
+        [(ngModel)]="selectedCourseId"
+        class="form-select"
+        id="course"
+        aria-label="course select"
+      >
+        <option [value]="course.id" *ngFor="let course of courses">
+          {{ course.courseName }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="level" class="col-sm-2 col-form-label">Level</label>
+    <div class="col-sm-6 mb-2">
+      <select
+        class="form-select"
+        name="level"
+        [(ngModel)]="selectedLevelId"
+        id="level"
+        aria-label="level select"
+      >
+        <option [value]="level.id" *ngFor="let level of levels">
+          {{ level.levelName }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <div class="col-md-4 mb-2">
+      <label for="month" class="form-label">Month</label>
+      <select
+        class="form-select"
+        [(ngModel)]="selectedMonthId"
+        name="month"
+        id="month"
+        aria-label="month select"
+      >
+        <option [value]="month.id" *ngFor="let month of months">
+          {{ month.signature }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-2">
+      <label for="week" class="form-label">Week</label>
+      <select
+        class="form-select"
+        name="week"
+        [(ngModel)]="selectedWeekId"
+        id="week"
+        aria-label="week select"
+      >
+        <option [value]="week.id" *ngFor="let week of weeks">
+          {{ week.signature }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-4 mb-2">
+      <label for="startDate" class="form-label">Start Date</label>
+      <input
+        type="date"
+        name="startDate"
+        [(ngModel)]="startDate"
+        class="form-control"
+        id="startDate"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="endDate" class="form-label">End Date</label>
+      <input
+        type="date"
+        name="endDate"
+        [(ngModel)]="endDate"
+        class="form-control"
+        id="endDate"
+      />
+    </div>
+  </div>
+  <div class="btns">
+    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="button" class="btn btn-warning">Cancel</button>
+  </div>
+</form>

@@ -1,7 +1,7 @@
 <div class="container">
   <form #studentForm="ngForm" (ngSubmit)="saveProfessor()">
     <div class="row mb-3">
-      <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+      <label for="firstName" class="col-sm-2 col-form-label">Prénom</label>
       <div class="col-sm-10">
         <input
           type="text"
@@ -16,7 +16,7 @@
     </div>
 
     <div class="row mb-3">
-      <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+      <label for="lastName" class="col-sm-2 col-form-label">Nom</label>
       <div class="col-sm-10">
         <input
           type="text"
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="row mb-3">
-      <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+      <label for="phone" class="col-sm-2 col-form-label">Téléphone</label>
       <div class="col-sm-10">
         <input
           type="text"
@@ -59,7 +59,7 @@
     </div>
 
     <label for="subjectsTaught" class="col-sm-2 col-form-label"
-      >Subjects taught</label
+      >Matières Enseignées</label
     >
     <div class="col-sm-10">
       <mat-list>
@@ -76,10 +76,10 @@
       mat-flat-button
       (click)="toggleSubjects()"
     >
-      Change subjects thought
+      Modifier Matières Enseignées
     </button>
 
-    <h4>Select subjects for {{ professor.lastName }}</h4>
+    <h4>Selectionner matières enseignées par{{ professor.lastName }}</h4>
     <div class="input-form-field">
       <mat-form-field appearance="standard">
         <mat-label>Filter</mat-label>
@@ -128,8 +128,8 @@
     </div>
 
     <mat-divider></mat-divider>
-    <button mat-raised-button type="sumit">Save</button>
-    <button mat-raised-button type="reset">Reset</button>
-    <button mat-raised-button (click)="goToProfessorsPage()">Cancel</button>
+    <button mat-raised-button type="sumit">Sauvegarder</button>
+    <button mat-raised-button type="reset">Réinitialiser</button>
+    <button mat-raised-button (click)="goToProfessorsPage()">Annuler</button>
   </form>
 </div>

@@ -1,0 +1,75 @@
+<div class="container">
+  <h2 class="text-center">Lists d'Absences Vierges Créés</h2>
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item
+      *ngFor="
+        let level of absenceViergeResponseIds.levels;
+        let levelIndex = index
+      "
+      #levelItem="cdkAccordionItem"
+      class="example-accordion-item"
+      role="button"
+      tabindex="0"
+      [attr.id]="'accordion-header-' + levelIndex"
+      [attr.aria-expanded]="levelItem.expanded"
+      [attr.aria-controls]="'accordion-body-' + levelIndex"
+    >
+      <div class="example-accordion-item-header" (click)="levelItem.toggle()">
+        {{ level.level.levelName }}
+        <span class="example-accordion-item-description">
+          Cliquez pour {{ levelItem.expanded ? "fermer" : "ouvrir" }}
+        </span>
+      </div>
+      <div
+        class="example-accordion-item-body"
+        role="region"
+        [style.display]="levelItem.expanded ? '' : 'none'"
+        [attr.id]="'accordion-body-' + levelIndex"
+        [attr.aria-labelledby]="'accordion-header-' + levelIndex"
+      >
+        <cdk-accordion style="width: 80%; background-color: azure; z-index: 3">
+          <cdk-accordion-item
+            *ngFor="let semester of level.semesters; let semesterIndex = index"
+            #semesterItem="cdkAccordionItem"
+            class="example-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'accordion-header-' + semesterIndex"
+            [attr.aria-expanded]="semesterItem.expanded"
+            [attr.aria-controls]="'accordion-body-' + semesterIndex"
+          >
+            <div
+              class="example-accordion-item-header"
+              (click)="semesterItem.toggle()"
+            >
+              {{ semester.semester.semester }}
+              <span class="example-accordion-item-description">
+                Cliquez pour {{ semesterItem.expanded ? "fermer" : "ouvrir" }}
+              </span>
+            </div>
+            <div
+              class="example-accordion-item-body"
+              role="region"
+              [style.display]="semesterItem.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + semesterIndex"
+              [attr.aria-labelledby]="'accordion-header-' + semesterIndex"
+            >
+              <p *ngFor="let course of semester.courses">
+                <a
+                  (click)="
+                    routerToAbsenceViergePage(
+                      level.level,
+                      semester.semester,
+                      course
+                    )
+                  "
+                  >{{ course.courseName }}</a
+                >
+              </p>
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+</div>

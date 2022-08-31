@@ -8,6 +8,14 @@ import { AttendanceComponent } from 'src/app/components/attendance/attendance.co
 import { TakeAttendanceComponent } from 'src/app/components/attendance/take-attendance/take-attendance.component';
 import { AttendanceSheetComponent } from 'src/app/components/attendance/take-attendance/attendance-sheet/attendance-sheet.component';
 import { WeeklyAttendanceComponent } from 'src/app/components/attendance/weekly-attendance/weekly-attendance.component';
+import { CreateWeeklyAttendaceComponent } from 'src/app/components/attendance/weekly-attendance/create-weekly-attendace/create-weekly-attendace.component';
+import { WeeklyAttendanceDisplayComponent } from 'src/app/components/attendance/weekly-attendance/weekly-attendance-display/weekly-attendance-display.component';
+import { CreateGeneralAttendanceComponent } from 'src/app/components/attendance/general-attendance/create-general-attendance/create-general-attendance.component';
+import { GeneralAttendanceComponent } from 'src/app/components/attendance/general-attendance/general-attendance.component';
+import { GeneralAttendanceDisplayComponent } from 'src/app/components/attendance/general-attendance/general-attendance-display/general-attendance-display.component';
+import { RecordObservationComponent } from 'src/app/components/attendance/general-attendance/record-observation/record-observation.component';
+
+
 
 
 @NgModule({
@@ -16,6 +24,13 @@ import { WeeklyAttendanceComponent } from 'src/app/components/attendance/weekly-
     TakeAttendanceComponent,
     AttendanceSheetComponent,
     WeeklyAttendanceComponent,
+    CreateWeeklyAttendaceComponent,
+    WeeklyAttendanceDisplayComponent,
+    GeneralAttendanceDisplayComponent,
+    CreateGeneralAttendanceComponent,
+    GeneralAttendanceComponent,
+    RecordObservationComponent
+    
   ],
   imports: [
     CommonModule,

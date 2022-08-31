@@ -1,13 +1,15 @@
 <div class="container">
   <div class="info">
-    <h3 class="text-center fs-5">Create time table in some few steps</h3>
+    <h3 class="text-center fs-5">
+      Créer un emploi du temps dans quelques étapes
+    </h3>
   </div>
 
   <form #classSubjectsForm="ngForm">
     <div class="row">
       <div class="col">
         <div class="row mb-3">
-          <label for="course" class="col-sm-2 col-form-label">Course</label>
+          <label for="course" class="col-sm-2 col-form-label">Matière</label>
           <div class="col-sm-10">
             <select
               id="course"
@@ -26,7 +28,7 @@
       </div>
       <div class="col">
         <div class="row mb-3">
-          <label for="level" class="col-sm-2 col-form-label">Level</label>
+          <label for="level" class="col-sm-2 col-form-label">Niveau</label>
           <div class="col-sm-10">
             <select
               id="level"
@@ -35,7 +37,6 @@
               aria-label=".form-select-sm example"
               name="selectedLevelId"
             >
-              <option selected>Select a level</option>
               <option [value]="level.id" *ngFor="let level of levels">
                 {{ level.levelName }}
               </option>
@@ -49,15 +50,13 @@
         <p class="text-start text-uppercase fs-6">All Subjects available</p>
       </div>
       <div class="col">
-        <p class="text-start text-uppercase fs-6">
-          Selected subjects for ... ...
-        </p>
+        <p class="text-start text-uppercase fs-6">Matières Selectionnés</p>
       </div>
     </div>
     <div class="row row2">
       <div class="col">
         <mat-form-field appearance="outline">
-          <mat-label>Filter</mat-label>
+          <mat-label>Chercher</mat-label>
           <input
             matInput
             (keyup)="applyFilter($event)"
@@ -69,7 +68,7 @@
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
           <!-- Name Column -->
           <ng-container matColumnDef="subjectName">
-            <th mat-header-cell *matHeaderCellDef>Subject</th>
+            <th mat-header-cell *matHeaderCellDef>Matière</th>
             <td mat-cell *matCellDef="let subject">
               {{ subject.subjectName }}
             </td>
@@ -85,7 +84,7 @@
           <!-- Row shown when there is no matching data. -->
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">
-              No data matching the filter "{{ input.value }}"
+              "{{ input.value }}" n'existe pas
             </td>
           </tr>
         </table>
@@ -120,7 +119,7 @@
           </mat-card>
         </ng-template>
         <ng-template #noSubjects>
-          <p class="text-center fs-5">No subjects have been selected</p>
+          <p class="text-center fs-5">Aucun matière n'est Selectionné</p>
         </ng-template>
       </div>
     </div>
@@ -133,7 +132,7 @@
         type="button"
         *ngIf="!savedSuccessfully"
       >
-        Save class subjects
+        Sauvegarder
       </button>
     </div>
     <div class="col d-grid" *ngIf="savedSuccessfully">
@@ -142,7 +141,7 @@
         (click)="goToTimeTableSheet()"
         type="button"
       >
-        Next
+        Suivant
       </button>
     </div>
   </div>

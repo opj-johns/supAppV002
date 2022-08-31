@@ -1,14 +1,14 @@
 <div class="container-sm col-8">
   <h2 class="text-center">
-    Welcome back
+    Bienvénu
     <strong>{{ professor.firstName }}&nbsp;{{ professor.lastName }}</strong>
   </h2>
   <p class="text-center fs-6">
-    Please make the following selections to proceed.
+    Voudriez-vous remplir le formulaire pour continuer
   </p>
   <form #takeAttendanceForm="ngForm">
     <div class="row mb-3">
-      <label for="course" class="col-sm-2 col-form-label">Course</label>
+      <label for="course" class="col-sm-2 col-form-label">Filère</label>
       <div class="col-sm-10">
         <select
           name="course"
@@ -25,7 +25,7 @@
     </div>
 
     <div class="row mb-3">
-      <label for="subject" class="col-sm-2 col-form-label">Subject</label>
+      <label for="subject" class="col-sm-2 col-form-label">Matière</label>
       <div class="col-sm-10">
         <select
           class="form-select form-select-sm"
@@ -45,7 +45,7 @@
     </div>
 
     <div class="row mb-3">
-      <label for="level" class="col-sm-2 col-form-label">Level</label>
+      <label for="level" class="col-sm-2 col-form-label">Année</label>
       <div class="col-sm-10">
         <select
           name="level"
@@ -61,7 +61,7 @@
       </div>
     </div>
     <button mat-raised-button (click)="goToAttendanceSheet()">
-      Get attendance sheet
+      Récuperer une feuille de présence
     </button>
   </form>
 </div>

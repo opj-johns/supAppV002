@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Update this course here</h2>
+  <h2>Modifier le nom du filière ici</h2>
   <form (ngSubmit)="onSubmit()" #courseForm="ngForm">
     <div class="form-group">
       <label for="courseName">Course Name</label>
@@ -18,10 +18,10 @@
       class="btn btn-success"
       [disabled]="!courseForm.form.valid"
     >
-      Update
+      Modifier
     </button>
     <button mat-raised-button (click)="cancelEditing()" class="btn btn-success">
-      Cancel
+      Annuler
     </button>
   </form>
 </div>

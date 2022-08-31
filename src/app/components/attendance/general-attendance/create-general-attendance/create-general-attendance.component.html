@@ -1,0 +1,58 @@
+<h2 class="text-center">Create Absence Vierge</h2>
+<form #form="ngForm" (ngSubmit)="createGeneralAttendanceSheet(form)">
+  <div class="mb-3 row">
+    <label for="course" class="col-sm-2 col-form-label">Filère</label>
+    <div class="col-sm-6 mb-2">
+      <select
+        name="course"
+        required
+        [(ngModel)]="selectedCourseId"
+        class="form-select"
+        id="course"
+        aria-label="course select"
+      >
+        <option [value]="course.id" *ngFor="let course of courses">
+          {{ course.courseName }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="level" class="col-sm-2 col-form-label">Année</label>
+    <div class="col-sm-6 mb-2">
+      <select
+        class="form-select"
+        name="level"
+        [(ngModel)]="selectedLevelId"
+        id="level"
+        aria-label="level select"
+      >
+        <option [value]="level.id" *ngFor="let level of levels">
+          {{ level.levelName }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="semester" class="col-sm-2 col-form-label">Semestre</label>
+    <div class="col-sm-6 mb-2">
+      <select
+        class="form-select"
+        name="semester"
+        [(ngModel)]="selectedSemesterId"
+        id="semester"
+        aria-label="semester select"
+      >
+        <option [value]="semester.id" *ngFor="let semester of semesters">
+          {{ semester.semester }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button type="submit" class="btn btn-primary">Créer</button>
+    <button type="button" class="btn btn-warning">Annuler</button>
+  </div>
+</form>

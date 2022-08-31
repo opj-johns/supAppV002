@@ -1,3 +1,21 @@
+<div class="container py-2">
+  <p class="text-center fs-6">{{ month.signature }}/{{ week.signature }}</p>
+  <p class="fs-5">
+    <span style="font-weight: bold">{{ level.cycle }}</span>
+  </p>
+  <p class="fs-5">
+    Niveau :
+    <span style="font-weight: bold"> {{ level.levelName }}</span>
+  </p>
+  <p class="fs-5">
+    Filière:
+    <span style="font-weight: bold">{{ course.courseName }}</span>
+  </p>
+  <p class="fs-5">
+    Promotion:
+    <span style="font-weight: bold">2021/2022</span>
+  </p>
+</div>
 <div class="container">
   <table>
     <thead>
@@ -20,4 +38,13 @@
       </tr>
     </tbody>
   </table>
+  <div class="d-grid gap-2 mt-3">
+    <button
+      class="btn btn-outline-primary"
+      (click)="recordWeeklyAttendance()"
+      type="button"
+    >
+      Enregistrée
+    </button>
+  </div>
 </div>

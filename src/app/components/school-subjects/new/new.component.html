@@ -1,8 +1,8 @@
 <div class="container">
-  <h2>Fill the form to add a new subject</h2>
+  <h2>Replir le formulaire pour ajouter un matière</h2>
   <form (ngSubmit)="onSubmit()" #subjectForm="ngForm">
     <div class="form-group">
-      <label for="subjectName">Subject Name</label>
+      <label for="subjectName">Nom du matière</label>
       <input
         type="text"
         class="form-control"
@@ -18,7 +18,7 @@
       class="btn btn-success"
       [disabled]="!subjectForm.form.valid"
     >
-      Add
+      Ajouter
     </button>
   </form>
 </div>

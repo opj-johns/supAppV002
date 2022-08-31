@@ -1,0 +1,39 @@
+<div class="d-flex flex-column align-items-center">
+  <div class="row mb-2">Niveau : {{ level.levelName }}</div>
+  <div class="row mb-2">Promotion: 2021/2022</div>
+  <div class="row mb-2">Cycle : {{ level.cycle }}</div>
+  <div class="row mb-2">Filère: {{ course.courseName }}</div>
+</div>
+
+<div class="div1">
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th class="th1" colspan="8" *ngFor="let month of months">
+        {{ month.signature }}
+      </th>
+      <th style="text-align: center; background-color: #d785a8" rowspan="2">
+        Total {{ months[0].semester.semester }}
+      </th>
+    </tr>
+    <tr>
+      <th style="background-color: coral">Matricule</th>
+      <th style="background-color: coral">Nom & Prénom</th>
+      <th class="th2" *ngFor="let heading of headings">
+        {{ heading }}
+      </th>
+    </tr>
+    <tr *ngFor="let student of studentsInClass; let index = index">
+      <td>{{ student.mat }}</td>
+      <td>
+        <a class="student-links" (click)="recordObservation(index)"
+          >{{ student.firstName }}&nbsp;{{ student.lastName }}</a
+        >
+      </td>
+      <td *ngFor="let view of views[index]">
+        {{ view }}
+      </td>
+    </tr>
+  </table>
+</div>

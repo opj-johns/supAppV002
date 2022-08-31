@@ -1,8 +1,8 @@
 <div class="container">
-  <h2>Courses in SupManagement</h2>
+  <h2>Les Filères disponibles</h2>
 
   <button class="btn-new" mat-raised-button routerLink="/courses/new">
-    Add New Course
+    Ajouter une Filère
   </button>
 
   <mat-card class="card" *ngFor="let course of courses">
@@ -13,7 +13,7 @@
       (click)="editCoursePage(course.id)"
       color="accent"
     >
-      Edit
+      Modifier
     </button>
   </mat-card>
 </div>

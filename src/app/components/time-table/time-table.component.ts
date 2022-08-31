@@ -11,7 +11,7 @@ import { TimeTableService } from 'src/app/services/time-table.service';
 })
 export class TimeTableComponent implements OnInit {
 
-  items = ['First year', 'Second year', 'Third year ', 'Fourth year ', 'Fifth year'];
+  items = ['Première année', 'Deuxième année ', 'Troixième année', 'Quatrième année', 'Cinquième année'];
   expandedIndex = 0;
   timetableIds!: Set<ClassIdentifier>;
   createdTBCourses: Array<Array<Course>>=[];

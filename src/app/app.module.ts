@@ -22,7 +22,13 @@ import { AttendanceService } from './services/attendance.service';
 import { TimeTableService } from './services/time-table.service'
 import { ClassroomService } from './services/classroom.service';
 import { AttendanceAuthComponent } from './components/attendance/attendance-auth/attendance-auth.component';
-import { CreateWeeklyAttendaceComponent } from './components/attendance/weekly-attendance/create-weekly-attendace/create-weekly-attendace.component';
+import { WeekService } from './services/week.service';
+import { MonthService } from './services/month.service';
+import { SemesterService } from './services/semester.service';
+
+
+
+
 
 
 
@@ -38,7 +44,7 @@ import { CreateWeeklyAttendaceComponent } from './components/attendance/weekly-a
     NewComponent,
     SubjectDetailComponent,
     AttendanceAuthComponent,
-    CreateWeeklyAttendaceComponent,
+   
     
   ],
   imports: [
@@ -49,9 +55,9 @@ import { CreateWeeklyAttendaceComponent } from './components/attendance/weekly-a
     MaterialModule 
   ],
   providers: [ProfessorService,SubjectService, StudentService,
-  LevelService,
+  LevelService,WeekService,MonthService,
 CourseService, AttendanceService,TimeTableService,
-ClassroomService],
+ClassroomService, SemesterService],
 
   bootstrap: [AppComponent]
 })

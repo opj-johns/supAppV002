@@ -6,4 +6,5 @@ export class ClassAttendance {
     professor!: Professor;
     subject!: Subject;
     classStudents!: Student[];
+    date!: Date;
 }

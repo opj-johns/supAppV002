@@ -1,0 +1,65 @@
+<div
+  class="constain d-flex flex-column justify-content-center align-items-center"
+>
+  <div class="heading">
+    <div class="fs-5">Matricule:&nbsp;&nbsp;{{ data.student.mat }}</div>
+    <div class="fs-5">Nom:&nbsp;&nbsp;{{ data.student.lastName }}</div>
+  </div>
+  <form #form="ngForm" class="mt-2">
+    <div class="mb-3 row">
+      <label for="authAbsent" class="col-sm-2 col-form-label"
+        >Absents authorisés</label
+      >
+      <div class="col-sm-7 mb-2 ml-3">
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="authorisedAbsents"
+          name="authAbsent"
+          id="authAbsent"
+        />
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="observ" class="col-sm-2 col-form-label">Observation</label>
+      <div class="col-sm-7 mb-2 ml-3">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="observation"
+          name="observ"
+          id="observ"
+        />
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="semester" class="col-sm-2 col-form-label">Mois</label>
+      <div class="col-sm-7 mb-2 ml-3">
+        <select
+          class="form-select"
+          name="month"
+          [(ngModel)]="selectedMonthIndex"
+          id="month"
+          aria-label="level select"
+        >
+          <option
+            [value]="index"
+            *ngFor="let month of data.months; let index = index"
+          >
+            {{ month.signature }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button type="button" (click)="returnData()" class="btn btn-primary">
+        Enregistré
+      </button>
+      <button type="button" (click)="cancel()" class="btn btn-warning">
+        Annuler
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,8 +1,7 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CreatedWeeklyAttendanceList } from 'src/app/models/created-weekly-attendance-list';
-import { AttendanceService } from 'src/app/services/attendance.service';
 import { ProfessorService } from 'src/app/services/professor.service';
 import { AttendanceAuthComponent } from './attendance-auth/attendance-auth.component';
 
@@ -13,21 +12,25 @@ import { AttendanceAuthComponent } from './attendance-auth/attendance-auth.compo
 })
 export class AttendanceComponent implements OnInit {
  
-  createdWeeklyAttendances!: CreatedWeeklyAttendanceList;
+  
+  toggleDisplay: boolean = true;
 
-  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
-  expandedIndex = 0;
+  
   collectedPwd!: string;
   
-  constructor(public dialog: MatDialog, private professorService: ProfessorService, 
-    private router: Router, private AttendanceService: AttendanceService) { }
+  constructor(public dialog: MatDialog, private professorService: ProfessorService, private router: Router
+    ) { }
 
   ngOnInit(): void {
-   this.getAllCreatedWeeklyAttendace()
+  
   }
 
+  toggleDisplayedComponent(){
+    this.toggleDisplay = !this.toggleDisplay;
+  }
+  
 
-    openAuthDialog(){
+  openAuthDialog(){
 
      let dialogRef= this.dialog.open(AttendanceAuthComponent, {
           width:'500px',
@@ -65,16 +68,6 @@ export class AttendanceComponent implements OnInit {
   }
 
 
-  getAllCreatedWeeklyAttendace(){
-    this.AttendanceService.fetchWeeklyCreatedAttendances().subscribe({
-      next:(resp)=>{
-          this.createdWeeklyAttendances = resp;
-          console.log(`successfully fetched fetchWeeklyCreatedAttendances: `, this.createdWeeklyAttendances);
-      },
-      error:(err)=>{
-          console.log(`Error fetching created weekly attendances`, err);
-      }
-    })
-  }
+  
 
 }

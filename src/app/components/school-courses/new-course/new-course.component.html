@@ -1,8 +1,8 @@
 <div class="container">
-  <h2>Fill the form to add a new course</h2>
+  <h2>Ajouter une nouveau matière</h2>
   <form (ngSubmit)="onSubmit()" #courseForm="ngForm">
     <div class="form-group">
-      <label for="courseName">Course Name</label>
+      <label for="courseName">Nom du matière</label>
       <input
         type="text"
         class="form-control"
@@ -18,10 +18,10 @@
       class="btn"
       [disabled]="!courseForm.form.valid"
     >
-      Add
+      Ajouter
     </button>
     <button mat-raised-button (click)="cancelEditing()" class="btn btn-success">
-      Cancel
+      Annuler
     </button>
   </form>
 </div>

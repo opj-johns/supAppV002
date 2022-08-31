@@ -1,11 +1,11 @@
-<h2 mat-dialog-title align="center">Professor Verification</h2>
+<h2 mat-dialog-title align="center">Vérification d'Authorisation</h2>
 <div>
   <mat-form-field
     mat-dialog-content
     class="example-full-width"
     appearance="fill"
   >
-    <mat-label>Enter password</mat-label>
+    <mat-label>Mot de passe</mat-label>
     <input
       type="password"
       matInput
@@ -15,13 +15,13 @@
       placeholder="password"
     />
     <mat-hint align="start"
-      ><strong>Don't disclose personal info</strong>
+      ><strong>Caché bien votre info personnelle</strong>
     </mat-hint>
     <mat-hint align="end">{{ message.value.length }} / 10</mat-hint>
   </mat-form-field>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close color="warn" class="btn-cancel">
-      Cancel
+      Annuler
     </button>
     <button
       mat-raised-button
@@ -29,7 +29,7 @@
       cdkFocusInitial
       (click)="onVerify()"
     >
-      Verify
+      Vérifier
     </button>
   </div>
 </div>

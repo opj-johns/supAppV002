@@ -1,9 +1,9 @@
 <div class="container">
-  <h2>Time Table Operations</h2>
+  <h2>Opérations d'emploi du temps</h2>
   <div class="operations">
-    <p><a routerLink="/timetable/create">Create Time Table</a></p>
+    <p><a routerLink="/timetable/create">Créer un emploi du temps</a></p>
   </div>
-  <p class="title">List of vaible Timetables</p>
+  <p class="title">List des emploi du temps</p>
   <cdk-accordion class="example-accordion">
     <cdk-accordion-item
       *ngFor="let item of items; let index = index"
@@ -21,7 +21,7 @@
       >
         {{ item }}
         <span class="example-accordion-item-description">
-          Click to {{ accordionItem.expanded ? "close" : "open" }}
+          Cliquez pour {{ accordionItem.expanded ? "fermer" : "ouvrir" }}
         </span>
       </div>
       <div
@@ -44,7 +44,7 @@
           </button>
         </p>
         <p *ngIf="createdTBCourses[index].length < 1">
-          No time tables created yet
+          Aucun emploi du temps n'est créer
         </p>
       </div>
     </cdk-accordion-item>

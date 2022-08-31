@@ -1,15 +1,15 @@
 <div class="container">
   <mat-list>
-    <mat-list-item>First Name: {{ professor.firstName }}</mat-list-item>
+    <mat-list-item>Prénom: {{ professor.firstName }}</mat-list-item>
     <mat-divider></mat-divider>
-    <mat-list-item>Last Name: {{ professor.lastName }}</mat-list-item>
+    <mat-list-item>Nom: {{ professor.lastName }}</mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item>Email: {{ professor.email }}</mat-list-item>
     <mat-divider></mat-divider>
-    <mat-list-item>Phone: {{ professor.phone }}</mat-list-item>
+    <mat-list-item>Téléphone: {{ professor.phone }}</mat-list-item>
     <mat-divider></mat-divider>
     <mat-divider></mat-divider>
-    <h3>Subjects thought</h3>
+    <h3>Matières Enseignées</h3>
     <mat-divider></mat-divider>
     <mat-list-item *ngFor="let subject of professor.subjectsTaught">
       {{ subject.subjectName }}
@@ -17,9 +17,9 @@
   </mat-list>
   <mat-divider></mat-divider>
 
-  <button mat-raised-button (click)="openProfessorEditPage()">Edit</button>
-  <button mat-raised-button (click)="deleteAction()">Delete</button>
+  <button mat-raised-button (click)="openProfessorEditPage()">?odifier</button>
+  <button mat-raised-button (click)="deleteAction()">Supprimer</button>
   <button mat-button color="primary" (click)="openProfessorsPage()">
-    Back To Subjects
+    Retour aux matières
   </button>
 </div>

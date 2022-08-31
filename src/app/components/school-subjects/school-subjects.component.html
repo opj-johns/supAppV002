@@ -1,11 +1,11 @@
 <div class="container">
-  <h2>All Subjects in SupManagement</h2>
+  <h2>Tous les matières à Sup</h2>
   <button mat-raised-button class="add-subject-btn" routerLink="/subjects/new">
-    Add New Subject
+    Ajouter un matière
   </button>
   <div class="form"></div>
   <mat-form-field appearance="outline">
-    <mat-label>Filter</mat-label>
+    <mat-label>Chercher</mat-label>
     <input
       matInput
       (keyup)="applyFilter($event)"
@@ -14,11 +14,7 @@
     />
   </mat-form-field>
 
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8"
-  >
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>No.</th>
@@ -40,9 +36,7 @@
 
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">
-        No data matching the filter "{{ input.value }}"
-      </td>
+      <td class="mat-cell" colspan="4">"{{ input.value }}" n'existe pas</td>
     </tr>
   </table>
 </div>

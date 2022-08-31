@@ -1,5 +1,6 @@
 import { Course } from "./course";
 import { Level } from "./level";
+import { Semester } from "./weekly-attendance-identifier";
 
 export interface CreatedWeeklyAttendanceList{
       levels: ALLevel[];
@@ -23,6 +24,7 @@ interface ALMonth{
 interface Month{
     id: number;
     signature: string;
+    semester: Semester;
 }
 
 interface Week{
