@@ -1,7 +1,7 @@
 <h2 class="text-center">Create weekly Attendance sheet</h2>
 <form #form="ngForm" (ngSubmit)="createWeekAttendanceSheet(form)">
   <div class="mb-3 row">
-    <label for="course" class="col-sm-2 col-form-label">Course</label>
+    <label for="course" class="col-sm-2 col-form-label">Filère</label>
     <div class="col-sm-6 mb-2">
       <select
         name="course"
@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="mb-3 row">
-    <label for="level" class="col-sm-2 col-form-label">Level</label>
+    <label for="level" class="col-sm-2 col-form-label">Niveau</label>
     <div class="col-sm-6 mb-2">
       <select
         class="form-select"
@@ -35,7 +35,7 @@
   </div>
   <div class="mb-3 row">
     <div class="col-md-4 mb-2">
-      <label for="month" class="form-label">Month</label>
+      <label for="month" class="form-label">Mois</label>
       <select
         class="form-select"
         [(ngModel)]="selectedMonthId"
@@ -49,7 +49,7 @@
       </select>
     </div>
     <div class="col-md-4 mb-2">
-      <label for="week" class="form-label">Week</label>
+      <label for="week" class="form-label">Semaine</label>
       <select
         class="form-select"
         name="week"
@@ -65,7 +65,7 @@
   </div>
   <div class="row mb-3">
     <div class="col-md-4 mb-2">
-      <label for="startDate" class="form-label">Start Date</label>
+      <label for="startDate" class="form-label">Date début</label>
       <input
         type="date"
         name="startDate"
@@ -75,7 +75,7 @@
       />
     </div>
     <div class="col-md-4">
-      <label for="endDate" class="form-label">End Date</label>
+      <label for="endDate" class="form-label">Date fin</label>
       <input
         type="date"
         name="endDate"
@@ -86,7 +86,7 @@
     </div>
   </div>
   <div class="btns">
-    <button type="submit" class="btn btn-primary">Create</button>
-    <button type="button" class="btn btn-warning">Cancel</button>
+    <button type="submit" class="btn btn-primary">Créer</button>
+    <button type="button" class="btn btn-warning">Annuler</button>
   </div>
 </form>

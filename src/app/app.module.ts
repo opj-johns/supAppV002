@@ -27,7 +27,7 @@ import { MonthService } from './services/month.service';
 import { SemesterService } from './services/semester.service';
 
 
-
+import { NgxCaptureService } from 'ngx-capture';
 
 
 
@@ -57,7 +57,7 @@ import { SemesterService } from './services/semester.service';
   providers: [ProfessorService,SubjectService, StudentService,
   LevelService,WeekService,MonthService,
 CourseService, AttendanceService,TimeTableService,
-ClassroomService, SemesterService],
+ClassroomService, SemesterService,NgxCaptureService],
 
   bootstrap: [AppComponent]
 })

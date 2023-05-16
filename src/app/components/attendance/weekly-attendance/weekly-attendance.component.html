@@ -16,16 +16,17 @@
     <span style="font-weight: bold">2021/2022</span>
   </p>
 </div>
-<div class="container">
-  <table>
-    <thead>
+
+<div class="table-wrapper">
+  <table #attendance>
+    <tr>
       <th>Matricule</th>
       <th>Nom</th>
       <th>Prenom</th>
       <th *ngFor="let subject of weeklyAttendanceSheet.subjects">
         {{ subject.subjectName }}
       </th>
-    </thead>
+    </tr>
     <tbody>
       <tr *ngFor="let row of weeklyAttendanceSheet.rows">
         <td>{{ row.student.mat }}</td>
@@ -38,13 +39,16 @@
       </tr>
     </tbody>
   </table>
-  <div class="d-grid gap-2 mt-3">
-    <button
-      class="btn btn-outline-primary"
-      (click)="recordWeeklyAttendance()"
-      type="button"
-    >
-      Enregistrée
-    </button>
-  </div>
+</div>
+<div class="d-grid gap-2 mt-3 m-1">
+  <button
+    class="btn btn-outline-primary"
+    (click)="recordWeeklyAttendance()"
+    type="button"
+  >
+    Enregistrée
+  </button>
+  <button class="btn btn-outline-primary" (click)="capture()" type="button">
+    Télécharger
+  </button>
 </div>

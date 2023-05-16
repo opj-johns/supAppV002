@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AttendanceService } from 'src/app/services/attendance.service';
 import { StudentService } from 'src/app/services/student.service';
 import { MonthService } from 'src/app/services/month.service'
@@ -11,6 +11,8 @@ import { Level } from 'src/app/models/level';
 import { MatDialog } from '@angular/material/dialog';
 import { RecordObservationComponent } from './record-observation/record-observation.component';
 import { AbsentViergeAuthAbsent } from 'src/app/models/absence-vierge-auth-absent';
+import {NgxCaptureService} from 'ngx-capture'
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-general-attendance',
@@ -18,6 +20,9 @@ import { AbsentViergeAuthAbsent } from 'src/app/models/absence-vierge-auth-absen
   styleUrls: ['./general-attendance.component.scss']
 })
 export class GeneralAttendanceComponent implements OnInit {
+
+  @ViewChild("general") generalAttendance: any;
+
   headings: string[]= []
   months!: Month[];
   studentsInClass!: Student[];
@@ -34,7 +39,8 @@ export class GeneralAttendanceComponent implements OnInit {
               private studentService: StudentService,
               private monthService: MonthService,
               private activatedRoute: ActivatedRoute,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private captureService: NgxCaptureService) { }
 
   ngOnInit(): void {
     this.extractRouteParams();
@@ -44,9 +50,42 @@ export class GeneralAttendanceComponent implements OnInit {
     
   }
 
-  ngBeforeViewInit(){
+  capture()
+  {
+    console.log("Hello");
+   this.captureService.getImage(this.generalAttendance.nativeElement, true)
+.pipe(
+     tap((img: any) => {
 
+                console.log("Hello");
+                console.log(img);
+            //  let file =   this.DataURIToBlob(img)
+            //  console.log(file);
+             this.print(img);
+     })
+).subscribe();
+    
   }
+
+   print(file: string){
+     
+      let img = document.createElement("img");
+      // console.log(`File to string:`,file.text())
+      // this.blobImage = file;
+      img.src = file; 
+      window.location.href = img.src.replace('image/png', 'image/octet-stream');
+      console.log(`Up till here`);
+      // const formData = new FormData();
+      // formData.append('file', file, 'image.png');
+      // // console.log(formData.get("file"));
+      
+      let container = document.createElement("div");
+      container.appendChild(img);
+      let winPrint = window.open('', '', `left=0,top=0,width=1100,height=1000,toolbar=0,scrollbars=0,status=0`);
+         winPrint?.document.appendChild(container);
+        // winPrint?.focus();
+        winPrint?.print();
+}
 
   prepareView(resp: AVMonthRecord[][]){
      for(let s=0; s<this.studentsInClass.length; s++){

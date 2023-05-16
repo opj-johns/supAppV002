@@ -8,7 +8,7 @@ import { Week } from '../models/weekly-attendance-identifier';
 })
 export class WeekService {
 
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://localhost:1010';
 
   constructor(private Http: HttpClient) { }
 

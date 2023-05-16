@@ -14,7 +14,7 @@ import { CreateGeneralAttendanceComponent } from 'src/app/components/attendance/
 import { GeneralAttendanceComponent } from 'src/app/components/attendance/general-attendance/general-attendance.component';
 import { GeneralAttendanceDisplayComponent } from 'src/app/components/attendance/general-attendance/general-attendance-display/general-attendance-display.component';
 import { RecordObservationComponent } from 'src/app/components/attendance/general-attendance/record-observation/record-observation.component';
-
+import { NgxCaptureModule} from 'ngx-capture';
 
 
 
@@ -36,7 +36,8 @@ import { RecordObservationComponent } from 'src/app/components/attendance/genera
     CommonModule,
     AttendanceRoutingModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    NgxCaptureModule
   ]
 })
 export class AttendanceModule { }

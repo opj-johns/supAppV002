@@ -8,7 +8,7 @@ import { Subject } from '../models/subject';
 })
 export class SubjectService {
 
-   baseUrl = 'http://localhost:8080';
+   baseUrl = 'http://localhost:1010';
 
   constructor(private httpClient: HttpClient) { } 
 

@@ -8,7 +8,7 @@ import { Level } from '../models/level';
 })
 export class LevelService {
   
-  baseUrl = 'http://localhost:8080'
+  baseUrl = 'http://localhost:1010'
 
   constructor(private http: HttpClient) { }
 

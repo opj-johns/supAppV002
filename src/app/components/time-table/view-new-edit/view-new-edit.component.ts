@@ -16,6 +16,8 @@ import { CourseService } from 'src/app/services/course.service';
 import { LevelService } from 'src/app/services/level.service';
 import { ProfessorService } from 'src/app/services/professor.service';
 import { TimeTableService } from 'src/app/services/time-table.service';
+import { NgxCaptureService } from 'ngx-capture';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-view-new-edit',
@@ -29,6 +31,8 @@ export class ViewNewEditComponent implements OnInit {
   @ViewChild('classroomSelect') classroomSelectTag!: ElementRef;
   @ViewChild('deleteButton') deleteButton!:ElementRef;
   @ViewChild('addButton') addButton!:ElementRef;
+  @ViewChild('timetable', { static: true }) timetable: any;
+
 
   noData = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,];
   level!:Level;
@@ -36,7 +40,8 @@ export class ViewNewEditComponent implements OnInit {
   courseId:number=18;
   levelId:number=5;
   gridPositions: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-  
+ 
+
   selectedSubjectId!:string;
   selectedProfessorId!:string;
   selectedClassroomId!:string;
@@ -48,7 +53,7 @@ export class ViewNewEditComponent implements OnInit {
   subjects!: Subject[];
   professors!: Professor[];
   classrooms!: Classroom[];
-  timeTableList: TimeTable[]=[];
+  timeTableList: TimeTable[]=[] ;
   filledGrids: number[]=[];
 
   displayedProfessors!:Professor[];
@@ -56,13 +61,15 @@ export class ViewNewEditComponent implements OnInit {
   
    view:boolean = true; 
 
+
   constructor(private courseService: CourseService,
               private levelService: LevelService,
               private activatedRoute: ActivatedRoute,
               private timeTableService: TimeTableService,
               private classSubjectsService: ClassSubjectService,
               private classroomService: ClassroomService,
-              private professorService: ProfessorService) { }
+              private professorService: ProfessorService,
+              private captureService: NgxCaptureService) { }
 
   ngOnInit(): void {
    
@@ -83,13 +90,46 @@ export class ViewNewEditComponent implements OnInit {
     this.fetchClassTimetable();
   }
 
-   createTimeTableList(){
-  
-    for(let i=0; i<20; i++){
-      this.timeTableList.push(new TimeTable);
-    }
-    console.log(this.timeTableList);
+  //  createTimeTableList(){
+  //   this.timeTableList = [];
+  //   for(let i=0; i<20; i++){
+  //     this.timeTableList.push(undefined);
+  //   }
+  //   console.log(this.timeTableList);
+  // }
+
+  capture()
+  {
+        console.log("Hello");
+      this.captureService.getImage(this.timetable.nativeElement, true)
+    .pipe(
+        tap((img: any) => {
+
+                    console.log("Hello");
+                    console.log(img);
+                //  let file =   this.DataURIToBlob(img)
+                //  console.log(file);
+                this.print(img);
+        })
+   ).subscribe();
+    
   }
+
+   print(file: string){
+     
+      let img = document.createElement("img");
+    
+      img.src = file; 
+      window.location.href = img.src.replace('image/png', 'image/octet-stream');
+      console.log(`Up till here`);
+    
+      
+      let container = document.createElement("div");
+      container.appendChild(img);
+      let winPrint = window.open('', '', `left=0,top=0,width=${this.timetable.width-50},height=${this.timetable.height-50},toolbar=0,scrollbars=0,status=0`);
+         winPrint?.document.appendChild(container);
+        winPrint?.print();
+}
 
    initializeCourse(){
     if(this.courseId !== undefined){
@@ -136,9 +176,12 @@ export class ViewNewEditComponent implements OnInit {
              let index = timetable.gridPosition-1;
              this.noData[index]=false; 
              this.timeTableList[index] = timetable;
+             this.filledGrids.push(index+1);
              console.log(`Class timetable:`, resp);
              console.log(`Time table list`,this.timeTableList);
+            //  console.log
            });
+           console.log(`filled grids:`, this.filledGrids)
       },
       error:(err)=>{ console.log(`Error fetching class time table`,err)}
     })
@@ -341,6 +384,8 @@ export class ViewNewEditComponent implements OnInit {
     // select subject 
     this.enableSubjectSelect();
     this.enableDeleteButton();
+
+   
   }
   enableSubjectSelect(){
    this.subejctSelectTag.nativeElement.disabled = false;
@@ -419,6 +464,7 @@ export class ViewNewEditComponent implements OnInit {
       if(exisitingPosition===undefined){this.filledGrids.push(position); }
       
       this.noData[position-1]= false;
+
       this.timeTableList[position-1] = timeTable;
       form.reset();
       // disable all select inputs and the buttons
@@ -447,9 +493,11 @@ export class ViewNewEditComponent implements OnInit {
 
   onUpdateButtonClicked(){
      this.view = false;
+     
   }
 
   onSaveButtonClicked(){
+    console.log(this.timeTableList);
       let timetables: TimeTable[]=[];
      
       console.log(`filled grids`, this.filledGrids);
@@ -459,7 +507,6 @@ export class ViewNewEditComponent implements OnInit {
       })
       
     console.log(`Ready to ship timetables`,timetables);
-     console.log(`ready to save timetable:`, timetables);
      this.timeTableService.saveNewTimeTableRecord(timetables).subscribe({
       next:(resp)=>{
           alert('successfully save timetable');

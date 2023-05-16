@@ -11,7 +11,7 @@ import { ClassIdentifier } from './../models/class-identifier';
 })
 export class StudentService { 
 
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://localhost:1010';
 
   constructor(private httpClient: HttpClient) { }
 

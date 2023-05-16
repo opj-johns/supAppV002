@@ -6,7 +6,7 @@
 </div>
 
 <div class="div1">
-  <table>
+  <table #general>
     <tr>
       <th></th>
       <th></th>
@@ -36,4 +36,11 @@
       </td>
     </tr>
   </table>
+</div>
+<div class="d-grid gap-2 mt-3 m-1">
+  <button class="btn btn-outline-primary" type="button">Enregistrée</button>
+  <button class="btn btn-outline-primary" (click)="capture()" type="button">
+    Télécharger
+  </button>
+  <button class="btn btn-outline-primary" type="button">Supprimer</button>
 </div>

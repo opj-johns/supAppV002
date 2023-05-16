@@ -35,7 +35,7 @@ export class AttendanceComponent implements OnInit {
      let dialogRef= this.dialog.open(AttendanceAuthComponent, {
           width:'500px',
           height:'300px',
-          position: { top: '150px', left:'600px'},
+          position: { top: '150px', left:'450px'},
           autoFocus: true,
           hasBackdrop:true
        });

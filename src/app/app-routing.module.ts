@@ -15,7 +15,7 @@ const routes: Routes = [
   },
    {path:'students', loadChildren: ()=> import('./modules/students/students.module').then(m=>m.StudentsModule)}
   ,
-    {path:'courses', loadChildren: ()=> import('./modules/courses/courses.module').then(m=>m.CoursesModule) },
+   {path:'courses', loadChildren: ()=> import('./modules/courses/courses.module').then(m=>m.CoursesModule) },
    {path:'levels', loadChildren:()=>import('./modules/levels/levels.module').then(m=>m.LevelsModule)},
    {path:'attendance', loadChildren:()=>import('./modules/attendance/attendance.module').then(m=>m.AttendanceModule)},
    {path:'timetable', loadChildren:()=>import('./modules/timetable/timetable.module').then(m=>m.TimetableModule)},

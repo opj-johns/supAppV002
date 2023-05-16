@@ -8,7 +8,7 @@ import { Professor } from '../models/professor'
 })
 export class ProfessorService {
 
-  baseUrl = "http://localhost:8080";
+  baseUrl = "http://localhost:1010";
 
   constructor(private httpClient: HttpClient) { } 
 

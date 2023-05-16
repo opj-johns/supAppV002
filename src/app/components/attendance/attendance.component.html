@@ -11,10 +11,16 @@
       <a routerLink="/attendance/absence_vierge/create">Créer Absence Vierge</a>
     </p>
     <p>
-      <a (click)="toggleDisplayedComponent()" *ngIf="toggleDisplay"
+      <a
+        (click)="toggleDisplayedComponent()"
+        class="ab-vierge"
+        *ngIf="toggleDisplay"
         >Absence Vierge</a
       >
-      <a (click)="toggleDisplayedComponent()" *ngIf="!toggleDisplay"
+      <a
+        (click)="toggleDisplayedComponent()"
+        class="list-absence"
+        *ngIf="!toggleDisplay"
         >List d'absence</a
       >
     </p>

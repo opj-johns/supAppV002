@@ -16,7 +16,7 @@ import { ClassroomStatusIdentifier } from './../models/classroom-status-identifi
 })
 export class TimeTableService {
 
-   baseUrl = 'http://localhost:8080';
+   baseUrl = 'http://localhost:1010';
 
   constructor(private http: HttpClient) { }
 

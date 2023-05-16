@@ -8,7 +8,7 @@ import { MaterialModule } from 'src/app/shared/angular/material.module';
 import { FormsModule } from '@angular/forms';
 import { ViewNewEditComponent } from '../../components/time-table/view-new-edit/view-new-edit.component';
 import { TimetableViewComponent } from 'src/app/components/time-table/timetable-view/timetable-view.component';
-
+import { NgxCaptureModule} from 'ngx-capture';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { TimetableViewComponent } from 'src/app/components/time-table/timetable-
     CommonModule,
     TimetableRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    NgxCaptureModule
   ]
 })
 export class TimetableModule { }

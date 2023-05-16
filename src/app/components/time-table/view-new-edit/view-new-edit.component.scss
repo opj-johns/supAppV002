@@ -4,11 +4,11 @@ mat-grid-tile {
 
 .container-fluid {
     padding: 5px;
-
+    
     table {
         overflow: scroll;
         border: 1px solid #000;
-
+        margin: 10px;
         tr {
             height: 110px;
 
@@ -18,7 +18,13 @@ mat-grid-tile {
             }
         }
     }
+
+        .header-table {
+            margin: 5px auto;
+        }
+
 }
+
 
 
 
@@ -51,3 +57,10 @@ mat-grid-tile {
     width: 5px;
     background-color: greenyellow;
 }
+
+@media print{
+    .btns {
+            display: none;
+        }
+}
+

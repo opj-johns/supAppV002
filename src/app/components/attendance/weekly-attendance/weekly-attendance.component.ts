@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/app/models/course';
 import { Level } from 'src/app/models/level';
@@ -6,6 +6,8 @@ import { Subject } from 'src/app/models/subject';
 import { DateFormat, Month, Week } from 'src/app/models/weekly-attendance-identifier';
 import { WeeklyAttendanceSheet } from 'src/app/models/weekly-attendance-sheet';
 import { AttendanceService } from 'src/app/services/attendance.service';
+import { NgxCaptureService } from 'ngx-capture';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-weekly-attendance',
@@ -13,6 +15,8 @@ import { AttendanceService } from 'src/app/services/attendance.service';
   styleUrls: ['./weekly-attendance.component.scss']
 })
 export class WeeklyAttendanceComponent implements OnInit {
+
+  @ViewChild('attendance', { static: true }) attendanceSheet: any;
 
   subjects!: Subject[];
   course!: Course;
@@ -24,11 +28,49 @@ export class WeeklyAttendanceComponent implements OnInit {
   weeklyAttendanceSheet!: WeeklyAttendanceSheet;
 
   constructor(private attendanceService: AttendanceService,
-              private activatedRoute: ActivatedRoute) {  }
+              private activatedRoute: ActivatedRoute,
+              private captureService: NgxCaptureService) {  }
 
   ngOnInit(): void {
     this.fetchWeeklyAttendanceSheet();
   }
+
+  capture()
+  {
+    console.log("Hello");
+   this.captureService.getImage(this.attendanceSheet.nativeElement, true)
+.pipe(
+     tap((img: any) => {
+
+                console.log("Hello");
+                console.log(img);
+            //  let file =   this.DataURIToBlob(img)
+            //  console.log(file);
+             this.print(img);
+     })
+).subscribe();
+    
+  }
+
+   print(file: string){
+     
+      let img = document.createElement("img");
+      // console.log(`File to string:`,file.text())
+      // this.blobImage = file;
+      img.src = file; 
+      window.location.href = img.src.replace('image/png', 'image/octet-stream');
+      console.log(`Up till here`);
+      // const formData = new FormData();
+      // formData.append('file', file, 'image.png');
+      // // console.log(formData.get("file"));
+      
+      let container = document.createElement("div");
+      container.appendChild(img);
+      let winPrint = window.open('', '', `left=0,top=0,width=${this.attendanceSheet.width},height=${this.attendanceSheet.height},toolbar=0,scrollbars=0,status=0`);
+         winPrint?.document.appendChild(container);
+        // winPrint?.focus();
+        winPrint?.print();
+}
 
 
   fetchWeeklyAttendanceSheet(){ 

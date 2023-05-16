@@ -6,11 +6,10 @@
     justify-content: center;
 
     .card {
-        background-color: aliceblue;
         color: black;
         font-size: 17px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        width: 50%;
+        min-width: 75%;
         
         margin-bottom: 10px;
         position: relative;

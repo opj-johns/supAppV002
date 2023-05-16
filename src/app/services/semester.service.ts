@@ -8,7 +8,7 @@ import { Semester } from '../models/weekly-attendance-identifier';
 })
 export class SemesterService {
 
-  baseUrl =  "http://localhost:8080";
+  baseUrl =  "http://localhost:1010";
   constructor(private http: HttpClient) { }
 
 
