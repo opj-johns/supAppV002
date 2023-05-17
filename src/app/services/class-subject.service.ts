@@ -6,13 +6,15 @@ import { Course } from '../models/course';
 import { Level } from '../models/level';
 import { Subject } from '../models/subject';
 import { ClassIdentifier } from '../models/class-identifier';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassSubjectService {
 
-  baseUrl = 'http://localhost:1010';
+  baseUrl = environment.baseUrl;
 
 
   constructor(private http: HttpClient) { }

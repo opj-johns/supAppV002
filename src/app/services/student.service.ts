@@ -5,13 +5,15 @@ import { Student } from './../models/student';
 import { Course } from '../models/course';
 import { Level } from '../models/level';
 import { ClassIdentifier } from './../models/class-identifier';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService { 
 
-  baseUrl = 'http://localhost:1010';
+  baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) { }
 

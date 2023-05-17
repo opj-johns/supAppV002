@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../models/subject';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
 
-   baseUrl = 'http://localhost:1010';
+   baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) { } 
 

@@ -10,13 +10,15 @@ import { TBStartTime } from '../models/tb-start-time';
 import { TBEndTime } from '../models/TBEndTime';
 import { TimeTable } from '../models/time-table';
 import { ClassroomStatusIdentifier } from './../models/classroom-status-identifier'
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeTableService {
 
-   baseUrl = 'http://localhost:1010';
+   baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 

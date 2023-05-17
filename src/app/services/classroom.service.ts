@@ -2,13 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Classroom } from '../models/classroom';
+import { environment } from 'src/environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassroomService {
 
-  baseUrl = 'http://localhost:1010';
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 

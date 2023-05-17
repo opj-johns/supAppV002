@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Month, Semester } from '../models/weekly-attendance-identifier';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Month, Semester } from '../models/weekly-attendance-identifier';
 })
 export class MonthService {
 
- baseUrl = 'http://localhost:1010';
+ baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 

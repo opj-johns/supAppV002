@@ -19,13 +19,14 @@ import { AbsenceViergeIdResponse } from '../models/absence-viergeid-response';
 import { AVMonthRecord } from '../models/absence-vierge-month-record';
 import { AbsentViergeAuthAbsent } from '../models/absence-vierge-auth-absent';
 import { AbsenceVierge } from '../models/AbsenceVierge';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AttendanceService {
 
-  baseUrl = 'http://localhost:8080';
+   baseUrl = environment.baseUrl;
 
 
   constructor(private httpClient: HttpClient) { }

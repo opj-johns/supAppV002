@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Course } from '../models/course';
+import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
@@ -9,7 +11,7 @@ import { Course } from '../models/course';
 })
 export class CourseService {
 
-  baseUrl = 'http://localhost:1010';
+  baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) { }
 
